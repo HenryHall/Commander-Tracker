@@ -1,0 +1,31 @@
+
+<div class="editableModal">
+  <div class="editScreen" ng-click="cb(false); $event.stopPropagation()">
+    <div class="editModal" ng-click="$event.stopPropagation()">
+
+      <div class="editContent">
+
+        <div class="row">
+          <div class="valueIn">{{value}}</div>
+          <div class="arrow"></div>
+          <div class="valueOut">
+            <input type="text" ng-model="valueOut">
+          </div>
+        </div>
+
+        <div class="row">
+          <button ng-repeat="option in options" ng-click="option.action()" class="btn btn-secondary">
+            {{option.display}}
+          </button>
+        </div>
+
+        <div class="row">
+          <button class="btn btn-primary" ng-click="cb(true); $event.stopPropagation()">Submit</button>
+          <button class="btn btn-danger" ng-click="cb(false); $event.stopPropagation()">Cancel</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+
+.editable:hover {
+  transform: scale(1.25);
+  transition: .25s;
+  background-color: rgb(237, 255, 124);
+  border-radius: 5px;
+  box-shadow: -2px -2px 5px 1px rgb(0, 0, 0);
+}
+
+.editableModal .editScreen {
+  z-index: 10;
+  display: flex;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.66);
+}
+
+.editableModal .editModal {
+  height: 450px;
+  width: 450px;
+  margin: auto;
+  background-color: grey;
+  border-radius: 5px;
+}

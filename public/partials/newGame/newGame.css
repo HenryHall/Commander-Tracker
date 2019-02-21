@@ -1,0 +1,30 @@
+
+#newPlayerForm {
+  padding: 20px;
+  border: 2px solid grey;
+  border-radius: 20px;
+}
+
+
+#newPlayerAlert {
+  text-align: center;
+}
+
+
+.playerIndex {
+  text-align: center;
+  font-size: 3em;
+}
+
+
+.playerCard {
+  border: 2px solid grey;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+
+.removePlaryerBtn {
+  position: absolute;
+  right: 5px;
+}

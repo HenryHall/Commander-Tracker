@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" ng-app="homeApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Live Commander Overlay</title>
+
+    <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./partials/newGame/newGame.css">
+    <link rel="stylesheet" href="./partials/joinGame/joinGame.css">
+  </head>
+  <body ng-controller="homeController">
+
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Commander Stream</h1>
+        <p class="lead">Create a live, interactive game state tracker for MTG Commander games</p>
+      </div>
+    </div>
+
+    <nav class="nav navbar-dark bg-dark nav-pills nav-fill">
+      <li class="nav-item">
+        <a class="nav-link" href="#" ng-click="setActive($event); toggleState(0)">New Game</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" ng-click="setActive($event); toggleState(1)">Join Game</a>
+      </li>
+    </nav>
+
+    <main>
+
+      <div>
+        <div ng-include="state"></div>
+      </div>
+
+    </main>
+
+
+
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCYsmtKQXRORf-4ltgadI4DhWpb6reTpJY",
+        authDomain: "commander-tracker.firebaseapp.com",
+        databaseURL: "https://commander-tracker.firebaseio.com",
+        projectId: "commander-tracker",
+        storageBucket: "commander-tracker.appspot.com",
+        messagingSenderId: "382426392851"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+    <script src="./vendor/jquery.min.js" charset="utf-8"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.js" charset="utf-8"></script>
+    <script src="./vendor/angular.min.js" charset="utf-8"></script>
+    <script src="./index.js" charset="utf-8"></script>
+    <script src="./partials/joinGame/joinGame.js" charset="utf-8"></script>
+    <script src="./partials/newGame/newGame.js" charset="utf-8"></script>
+    <script src="./directives/editable.js" charset="utf-8"></script>
+  </body>
+</html>

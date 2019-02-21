@@ -1,0 +1,56 @@
+<html ng-app="overlayApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Commander Overlay</title>
+
+    <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap-glyphicons.css">
+    <link rel="stylesheet" href="./overlay/overlay.css">
+    <link rel="stylesheet" href="../directives/editable/editable.css">
+  </head>
+  <body ng-controller="mainController">
+
+    <div id="infoContainer">
+      <div class="player d-flex" ng-style="playerStyle[$index]" ng-repeat="(player, data) in gameData.players">
+        <div class="m-auto d-table-cell col-4 col-sm-6 col-md-4">
+          <h2 class="pName"><editable type="text" obj="data" prop="name" /></h2>
+          <h3 class="pCommander"><editable type="text" obj="data" prop="commander" /></h3>
+        </div>
+
+        <div class="cmdrInfo col-4 col-sm-3">
+          <h1 class="m-auto"><editable type="number" obj="data" prop="life" /></h1>
+          <h1 class="cmdrCast m-auto d-table-cell"><editable type="number" obj="data" prop="castCount" /></h1>
+        </div>
+
+        <div class="d-flex col-4 col-sm-3 col-md-5">
+          <div class="row m-auto">
+            <div ng-repeat="opponent in data.damage track by $index" class="justify-content-between d-inline-flex d-md-table-cell col-12 d-md-block col-md-{{12 / data.damage.length}}">
+              <h5 class="mb-0 pb-0 text-center"><editable type="text" obj="opponent" prop="name" /></h5>
+              <div>
+              </div>
+              <h5 class="mb-0 ml-2 ml-md-0 pb-0 text-center"><editable type="number" obj="opponent" prop="damage" />/21</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <script src="./vendor/angular.min.js" charset="utf-8"></script>
+    <script src="./vendor/jquery.min.js" charset="utf-8"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.js" charset="utf-8"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <script src="./vendor/angularfire.min.js" charset="utf-8"></script>
+
+    <script src="./overlay/players.js" charset="utf-8"></script>
+    <script src="./overlay/overlay.js" charset="utf-8"></script>
+    <script src="../directives/editable/editable.js" charset="utf-8"></script>
+  </body>
+</html>
