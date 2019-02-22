@@ -2,15 +2,17 @@
 .editable:hover {
   transform: scale(1.25);
   transition: .25s;
-  background-color: rgb(237, 255, 124);
+  padding: 10px;
+  background-color: rgb(48, 190, 215);
   border-radius: 5px;
   box-shadow: -2px -2px 5px 1px rgb(0, 0, 0);
 }
 
-.editableModal .editScreen {
+.editableSetter .editScreen {
   z-index: 10;
   display: flex;
   position: fixed;
+  overflow: auto;
   top: 0px;
   left: 0px;
   height: 100vh;
@@ -18,10 +20,30 @@
   background-color: rgba(0, 0, 0, 0.66);
 }
 
-.editableModal .editModal {
-  height: 450px;
-  width: 450px;
+.editableSetter .editModal {
   margin: auto;
   background-color: grey;
   border-radius: 5px;
+  padding: 5%;
+
+  height: 90%;
+  width: 85%;
+}
+
+.editControlRow {
+  height: 30%;
+}
+
+.editControlRow:not(:last-child) {
+  margin-bottom: 4.5%
+}
+
+.editControlRow > button {
+  margin: auto;
+  padding-left: .75em;
+  padding-right: .75em;
+}
+
+.editableSetter .glyphicon {
+  font-size: xx-large;
 }

@@ -1,29 +1,52 @@
 
-<div class="editableModal">
+<div class="editableSetter">
+
   <div class="editScreen" ng-click="cb(false); $event.stopPropagation()">
+
     <div class="editModal" ng-click="$event.stopPropagation()">
 
-      <div class="editContent">
+      <div class="h-100">
 
-        <div class="row">
-          <div class="valueIn">{{value}}</div>
-          <div class="arrow"></div>
-          <div class="valueOut">
-            <input type="text" ng-model="valueOut">
+        <!-- Row 1 -->
+        <div class="editControlRow row text-center">
+          <div class="col-12 col-sm-5 col-md-4 d-table-cell m-auto">
+            <label for="currentValue">Current Value</label>
+            <input id="currentValue" class="form-control text-center" type="text" ng-model="value" value="{{value}}" readonly>
+          </div>
+
+          <div class="d-none
+                      d-sm-table-cell
+                      col-sm-2
+                      col-md-4
+                      text-center
+                      m-auto
+                      glyphicon glyphicon-arrow-right
+                      "></div>
+
+          <div class="col-12 col-sm-5 col-md-4 d-table-cell m-auto">
+            <label for="newValue">New Value</label>
+            <input id="newValue" class="form-control text-center" type="text" ng-model="valueOut">
           </div>
         </div>
 
-        <div class="row">
-          <button ng-repeat="option in options" ng-click="option.action()" class="btn btn-secondary">
+        <!-- Row 2 -->
+        <div class="editControlRow row justify-content-md-center">
+          <button ng-repeat="option in options" ng-click="option.action()"
+                  class="btn btn-lg btn-secondary
+                        {{options.length % 2 == 0 ? 'col-12 col-sm-5 col-md-2' : 'col-12 col-sm-5'}}
+                        ">
             {{option.display}}
           </button>
         </div>
 
-        <div class="row">
-          <button class="btn btn-primary" ng-click="cb(true); $event.stopPropagation()">Submit</button>
-          <button class="btn btn-danger" ng-click="cb(false); $event.stopPropagation()">Cancel</button>
+        <!-- Row 3 -->
+        <div class="editControlRow row">
+          <button class="col-12 col-sm-5 col-md-4 btn btn-lg btn-primary" ng-click="cb(true); $event.stopPropagation()">Submit</button>
+          <button class="col-12 col-sm-5 col-md-4 btn btn-lg btn-danger" ng-click="cb(false); $event.stopPropagation()">Cancel</button>
         </div>
 
+
+      <!-- End editContent -->
       </div>
 
     </div>
