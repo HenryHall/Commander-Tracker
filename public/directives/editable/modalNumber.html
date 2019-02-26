@@ -1,0 +1,50 @@
+
+<div class="modalNumber">
+  <div class="h-100">
+
+    <!--Modal Row 1 -->
+    <div class="editControlHeader row text-center">
+      <!-- Input Display -->
+      <div class="row col-12 col-sm-5 col-md-4 d-table-cell m-auto">
+        <h1 class="display-4">{{value}}</h1>
+      </div>
+
+      <!-- Glyphicon Arrow -->
+      <div class="d-none
+                  d-sm-table-cell
+                  col-sm-2
+                  col-md-4
+                  text-center
+                  m-auto
+                  glyphicon glyphicon-arrow-right
+                  "></div>
+
+      <!-- Output Display -->
+      <div class="col-12 col-sm-5 col-md-4 d-table-cell m-auto">
+        <h1 class="display-4">{{numberUpdate()}}</h1>
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="editControlRow row justify-content-md-center">
+
+      <div class="row col-4 m-auto btn-group" data-toggle="buttons">
+        <label class="col-12 col-sm-6 btn-link">
+          <input type="radio" ng-model="operator.type" value="+" /> <span class=".glyphicon glyphicon-plus"></span>
+        </label>
+        <label class="col-12 col-sm-6 btn-link">
+          <input type="radio" ng-model="operator.type" value="-" /> <span class=".glyphicon glyphicon-minus"></span>
+        </label>
+      </div>
+
+      <input autofocus class="h-80 m-auto col-8 form-control text-center modalInput" type="text" maxlength="6" ng-model="$parent.applyValue">
+    </div>
+
+    <!-- Row 3 -->
+    <div class="editControlRow row">
+      <button class="col-12 col-sm-5 col-md-4 btn btn-lg btn-primary editSubmitBtn" ng-click="cb(true); $event.stopPropagation()">Submit</button>
+      <button class="col-12 col-sm-5 col-md-4 btn btn-lg btn-danger editCancelBtn" ng-click="cb(false); $event.stopPropagation()">Cancel</button>
+    </div>
+
+  </div>
+</div>

@@ -13,13 +13,11 @@ overlayApp.directive('editable', function() {
         throw new Error(`This directive requires an object referece and a property.\n$scope.type: ${$scope.type}, $scope.object: ${$scope.obj}, $scope.prop: ${$scope.prop}`);
       }
 
-
       let modal = $compile(`<edit-box type="type" value="obj[prop]" callback="setValue(value)"/>`)($scope);
       let $modal = modal[0];
-      // let $target = $element[0].querySelector('.editableTarget');
+
 
       $scope.showModal = function(){
-        console.log("Showing Modal from editable", $modal);
         $element.off('click', $scope.showModal);
         document.body.append($modal);
         $scope.$apply();
@@ -32,7 +30,7 @@ overlayApp.directive('editable', function() {
         modal.detach();
         $element.on('click', $scope.showModal);
 
-        if(newValue){
+        if(newValue !== undefined){
           $scope.obj[$scope.prop] = newValue;
         }
       };
@@ -54,37 +52,27 @@ overlayApp.directive('editable', function() {
     },
     controller: ['$scope', function($scope){
 
-      let options = {
-        number: [
-          {
-            display: '+5',
-            action: function(){ $scope.valueOut = Number.parseInt($scope.valueOut) + 5; }
-          },
-          {
-            display: '+1',
-            action: function(){ $scope.valueOut = Number.parseInt($scope.valueOut) + 1; }
-          },
-          {
-            display: '-1',
-            action: function(){ $scope.valueOut = Number.parseInt($scope.valueOut) - 1; }
-          },
-          {
-            display: '-5',
-            action: function(){ $scope.valueOut = Number.parseInt($scope.valueOut) - 5; }
-          }
-        ],
-        text: [
-          {
-            display: 'To Upper',
-            action: function(){ $scope.valueOut = $scope.valueOut.toString().toUpperCase(); }
-          },
-          {
-            display: 'To Lower',
-            action: function(){ $scope.valueOut = $scope.valueOut.toString().toLowerCase(); }
-          }
-        ]
+      //Set ng-view partial and callback function
+      let typeSet = {
+        text: './directives/editable/modalText.html',
+        number: './directives/editable/modalNumber.html'
       };
+      $scope.typeView = typeSet[$scope.type];
+      $scope.operator = {type: '+'};
 
+      $scope.numberUpdate = function(){
+        let applyValue = $scope.applyValue || 0;
+        switch ($scope.operator.type) {
+          case '+':
+            $scope.valueOut = parseInt($scope.value) + parseInt(applyValue);
+            return $scope.valueOut;
+          case '-':
+            $scope.valueOut = parseInt($scope.value) - parseInt(applyValue);
+            return $scope.valueOut;
+          default:
+            throw new Error(`Type: ${$scope.operator.type} is not an accepted type`)
+        }
+      }
 
       $scope.cb = function(changeVal){
         console.log("Send value?", changeVal, $scope.valueOut);
@@ -98,11 +86,10 @@ overlayApp.directive('editable', function() {
 
       if($scope.value === undefined || !$scope.callback){
         throw new Error(`This directive requires a value and a callback.\n$scope.value: ${$scope.value}, $scope.callback: ${$scope.callback}`);
-      } else if(!$scope.type || !options[$scope.type]){
+      } else if(!$scope.type || !typeSet[$scope.type]){
         throw new Error(`Type ${$scope.type} is not found in editTextBox's options config.`);
       }
 
-      $scope.options = options[$scope.type];
       $scope.valueOut = $scope.value;
 
 

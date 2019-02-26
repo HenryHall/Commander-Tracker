@@ -35,7 +35,7 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', '$fir
       gameData.$bindTo($scope, "gameData").then(() => {
         //Set CSS, bind resie event
         $scope.setStyles();
-        $window.addEventListener('resize', $scope.setStyles );
+        $window.addEventListener('resize', () => {$scope.setStyles(); $scope.$apply();} );
       });
     }).catch((error) => {
       throw new Error(error);
@@ -51,12 +51,12 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', '$fir
     $scope.playerStyle = new Array(playerCount);
 
     const colors = [
-      {border: '#001FFF', font: '#0C60E8', background: '#111155'},
-      {border: '#FF5555', font: '#E80C21', background: '#551111'},
-      {border: '#00FF57', font: '#0CE819', background: '#115533'},
-      {border: '#FF00DF', font: '#FF0CE8', background: '#8B0DFF'},
-      {border: '#FF9E00', font: '#E8770C', background: '#552211'},
-      {border: '#FFF200', font: '#E8C70C', background: '#555511'}
+      {border: '#1a237e', background: '#3d5afe'},
+      {border: '#9a0007', background: '#d32f2f'},
+      {border: '#005005', background: '#2e7d32'},
+      {border: '#790e8b', background: '#ab47bc'},
+      {border: '#b1bfca', background: '#e3f2fd'},
+      {border: '#cabf45', background: '#fff176'}
     ];
 
     for(let i=0; i<playerCount; i++){

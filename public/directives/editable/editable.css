@@ -1,11 +1,47 @@
 
+/* Main Directive Element Style */
+.editable {
+  padding: 5px;
+  font-size: 4vmin;
+}
+
 .editable:hover {
-  transform: scale(1.25);
   transition: .25s;
-  padding: 10px;
   background-color: rgb(48, 190, 215);
   border-radius: 5px;
   box-shadow: -2px -2px 5px 1px rgb(0, 0, 0);
+}
+
+
+/* Modal Style */
+.editableSetter .editModal {
+  width: 90%;
+  height: 90%;
+  margin: auto;
+  border-radius: 5px;
+  color: white;
+  background-color: #4f5b62;
+}
+
+@media (min-width: 576px){
+  .editableSetter .editModal {
+    width: 90%;
+    height: 60%;
+  }
+}
+
+@media (min-width: 768px){
+  .editableSetter .editModal {
+    width: 75%;
+    height: 60%;
+  }
+}
+
+@media (min-width: 992px){
+  .editableSetter .editModal {
+    width: 60%;
+    height: 60%;
+  }
 }
 
 .editableSetter .editScreen {
@@ -20,22 +56,17 @@
   background-color: rgba(0, 0, 0, 0.66);
 }
 
-.editableSetter .editModal {
-  margin: auto;
-  background-color: grey;
+.editControlHeader {
+  height: 30%;
+  background-color: #263238;
   border-radius: 5px;
-  padding: 5%;
-
-  height: 90%;
-  width: 85%;
 }
 
 .editControlRow {
-  height: 30%;
-}
-
-.editControlRow:not(:last-child) {
-  margin-bottom: 4.5%
+  height: 35%;
+  width: 90%;
+  margin: inherit;
+  margin: auto;
 }
 
 .editControlRow > button {
@@ -44,6 +75,16 @@
   padding-right: .75em;
 }
 
+.editSubmitBtn, .editCancelBtn {
+  color: black;
+  background-color: #a7c0cd;
+}
+
 .editableSetter .glyphicon {
   font-size: xx-large;
+}
+
+.modalInput {
+  font-size: 2em;
+  height: 80%;
 }

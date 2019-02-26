@@ -1,0 +1,39 @@
+<div class="modalText">
+  <div class="h-100">
+
+    <!--Modal Row 1 -->
+    <div class="editControlHeader row text-center">
+      <!-- Input Display -->
+      <div class="row col-12 col-sm-5 col-md-4 d-table-cell m-auto">
+        <span>{{value}}</span>
+      </div>
+
+      <!-- Glyphicon Arrow -->
+      <div class="d-none
+                  d-sm-table-cell
+                  col-sm-2
+                  col-md-4
+                  text-center
+                  m-auto
+                  glyphicon glyphicon-arrow-right
+                  "></div>
+
+      <!-- Output Display -->
+      <div class="col-12 col-sm-5 col-md-4 d-table-cell m-auto">
+        <span>{{valueOut}}</span>
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="editControlRow row justify-content-md-center">
+      <input autofocus class="modalInput m-auto form-control text-center" type="text" maxlength="50" ng-model="$parent.valueOut" value="{{valueOut}}">
+    </div>
+
+    <!-- Row 3 -->
+    <div class="editControlRow row">
+      <button class="col-12 col-sm-5 col-md-4 btn btn-lg btn-primary editSubmitBtn" ng-click="cb(true); $event.stopPropagation()">Submit</button>
+      <button class="col-12 col-sm-5 col-md-4 btn btn-lg btn-danger editCancelBtn" ng-click="cb(false); $event.stopPropagation()">Cancel</button>
+    </div>
+
+  </div>
+</div>
