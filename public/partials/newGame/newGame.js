@@ -93,7 +93,7 @@ function writeGameData(playersData){
   playersData.forEach( (player) => {
     //Set damage object
     let opponentsData = playersData.filter((p) => {return p.id == player.id ? false : true;});
-    let opponentsArr = opponentsData.map((opponent) => {return {id: opponent.id, name: opponent.name, damage: 0}; });
+    let opponentsArr = opponentsData.map((opponent) => {return {id: opponent.id, damage: 0}; });
     player.damage = opponentsArr;
 
     //Map to gameData

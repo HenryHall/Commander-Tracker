@@ -13,7 +13,7 @@ overlayApp.directive('editable', function() {
         throw new Error(`This directive requires an object referece and a property.\n$scope.type: ${$scope.type}, $scope.object: ${$scope.obj}, $scope.prop: ${$scope.prop}`);
       }
 
-      let modal = $compile(`<edit-box type="type" value="obj[prop]" callback="setValue(value)"/>`)($scope);
+      let modal = getModal();
       let $modal = modal[0];
 
 
@@ -28,6 +28,8 @@ overlayApp.directive('editable', function() {
         console.log("New value:", newValue);
 
         modal.detach();
+        modal = getModal();
+        $modal = modal[0];
         $element.on('click', $scope.showModal);
 
         if(newValue !== undefined){
@@ -36,6 +38,10 @@ overlayApp.directive('editable', function() {
       };
 
       $element.on('click', $scope.showModal);
+
+      function getModal(){
+        return $compile(`<edit-box type="type" value="obj[prop]" callback="setValue(value)"/>`)($scope);
+      }
 
     }]  //End controller
   }
@@ -58,7 +64,7 @@ overlayApp.directive('editable', function() {
         number: './directives/editable/modalNumber.html'
       };
       $scope.typeView = typeSet[$scope.type];
-      $scope.operator = {type: '+'};
+      $scope.operator = {type: '-'};
 
       $scope.numberUpdate = function(){
         let applyValue = $scope.applyValue || 0;

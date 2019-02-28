@@ -2,7 +2,7 @@
 /* Main Directive Element Style */
 .editable {
   padding: 5px;
-  font-size: 4vmin;
+  /* font-size: 4vmin; */
 }
 
 .editable:hover {
@@ -73,6 +73,11 @@
   margin: auto;
   padding-left: .75em;
   padding-right: .75em;
+}
+
+.nbrRadio {
+  height: 80%;
+  margin: auto;
 }
 
 .editSubmitBtn, .editCancelBtn {

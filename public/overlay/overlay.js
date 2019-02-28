@@ -67,14 +67,14 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', '$fir
         "background-color": colors[i].background
       };
     }
-
-    // let pCardEls = document.querySelectorAll('.player');
-    // pCardEls.forEach((player, i) => {
-    //   player.style.height = cardHeight + 'px';
-    //   player.style.border = '8px solid ' + colors[i].border;
-    //   player.style.backgroundColor = colors[i].background;
-    // });
   }; //End setStyles
+
+
+  $scope.getNameByID = function(id){
+    for(player in $scope.gameData.players){
+      if($scope.gameData.players[player].id == id) return $scope.gameData.players[player].name;
+    }
+  };
 
 
   //Init

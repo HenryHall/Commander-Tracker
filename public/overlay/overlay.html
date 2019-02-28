@@ -25,12 +25,24 @@
         <div class="d-flex col-4 col-sm-3 col-md-5">
           <div class="row m-auto">
             <div ng-repeat="opponent in data.damage track by $index" class="justify-content-between d-inline-flex d-md-table-cell col-12 d-md-block col-md-{{12 / data.damage.length}}">
-              <h5 class="mb-0 pb-0 text-center"><editable type="text" obj="opponent" prop="name" /></h5>
+              <h5 class="mb-0 pb-0 text-center">{{getNameByID(opponent.id)}}</h5>
               <div>
               </div>
               <h5 class="mb-0 ml-2 ml-md-0 pb-0 text-center"><editable type="number" obj="opponent" prop="damage" />/21</h5>
             </div>
           </div>
+
+          <!-- <div class="row m-auto">
+            <div class="justify-content-between row col-6 col-md-12">
+              <h5 ng-repeat="opponent in data.damage track by $index" class="m-auto">{{getNameByID(opponent.id)}}</h5>
+            </div>
+
+            <div class="justify-content-between row col-6 col-md-12">
+              <h5 ng-repeat="opponent in data.damage track by $index" class="m-auto"><editable type="number" obj="opponent" prop="damage" />/21</h5>
+            </div>
+          </div> -->
+
+
         </div>
       </div>
     </div>
@@ -49,7 +61,6 @@
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
     <script src="./vendor/angularfire.min.js" charset="utf-8"></script>
 
-    <script src="./overlay/players.js" charset="utf-8"></script>
     <script src="./overlay/overlay.js" charset="utf-8"></script>
     <script src="../directives/editable/editable.js" charset="utf-8"></script>
   </body>

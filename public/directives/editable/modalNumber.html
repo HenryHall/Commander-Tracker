@@ -28,16 +28,20 @@
     <!-- Row 2 -->
     <div class="editControlRow row justify-content-md-center">
 
-      <div class="row col-4 m-auto btn-group" data-toggle="buttons">
-        <label class="col-12 col-sm-6 btn-link">
-          <input type="radio" ng-model="operator.type" value="+" /> <span class=".glyphicon glyphicon-plus"></span>
+      <div class="btn-group row col-4 m-auto" data-toggle="buttons">
+        <label class="d-flex btn btn-lg btn-primary nbrRadio col-12 col-sm-6">
+          <div class="m-auto">
+            <input type="radio" ng-model="operator.type" value="-" /> <span class=".glyphicon glyphicon-minus"></span>
+          </div>
         </label>
-        <label class="col-12 col-sm-6 btn-link">
-          <input type="radio" ng-model="operator.type" value="-" /> <span class=".glyphicon glyphicon-minus"></span>
+        <label class="d-flex btn btn-lg btn-primary nbrRadio col-12 col-sm-6">
+          <div class="m-auto">
+            <input type="radio" ng-model="operator.type" value="+" /> <span class=".glyphicon glyphicon-plus"></span>
+          </div>
         </label>
       </div>
 
-      <input autofocus class="h-80 m-auto col-8 form-control text-center modalInput" type="text" maxlength="6" ng-model="$parent.applyValue">
+      <input autofocus class="h-80 m-auto col-8 form-control text-center modalInput" type="number" maxlength="6" ng-model="$parent.applyValue">
     </div>
 
     <!-- Row 3 -->
