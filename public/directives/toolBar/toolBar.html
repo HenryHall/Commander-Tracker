@@ -1,0 +1,16 @@
+
+<div id="toolBar">
+
+  <div id="toolBarHeader" class="">
+    <div class="navSection" ng-repeat="toolBarButton in navItems">
+      <div class="navSectionContent">
+        {{toolBarButton}}
+      </div>
+    </div>
+  </div>
+
+  <div id="toolBarMenuScreen">
+    <div id="toolBarMenu" ng-include="typeView"></div>
+  </div>
+
+</div>

@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap-glyphicons.css">
     <link rel="stylesheet" href="./overlay/overlay.css">
     <link rel="stylesheet" href="../directives/editable/editable.css">
+    <link rel="stylesheet" href="../directives/toolBar/toolBar.css">
   </head>
   <body ng-controller="mainController">
 
     <div id="infoContainer">
+      <tool-bar></tool-bar>
+
       <div class="player d-flex" ng-style="playerStyle[$index]" ng-repeat="(player, data) in gameData.players">
         <div class="m-auto d-table-cell col-4 col-sm-6 col-md-4">
           <h2 class="pName"><editable type="text" obj="data" prop="name" /></h2>
@@ -63,5 +66,6 @@
 
     <script src="./overlay/overlay.js" charset="utf-8"></script>
     <script src="../directives/editable/editable.js" charset="utf-8"></script>
+    <script src="../directives/toolBar/toolBar.js" charset="utf-8"></script>
   </body>
 </html>

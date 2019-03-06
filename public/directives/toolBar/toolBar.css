@@ -1,0 +1,27 @@
+
+#toolBarHeader {
+  position: absolute;  /* Transition Property */
+  top: -15%;  /* Transition Property */
+  left: 0px;
+  height: 15vh;
+  width: 100vw;
+  transition: 1s;
+  background-color: rgb(182, 179, 180);
+  display: flex;
+}
+
+#toolBarHeader.open {
+  position: relative; /* Transition Property */
+  top: 0%;  /* Transition Property */
+}
+
+.navSection {
+  margin: auto;
+  margin-left: 25px;
+}
+
+.navSectionContent {
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}

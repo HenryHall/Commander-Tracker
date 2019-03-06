@@ -23,9 +23,11 @@ overlayApp.config(['$locationProvider', function($locationProvider){
 
 overlayApp.controller('mainController', ['$scope', '$window', '$location', '$firebaseObject', function($scope, $window, $location, $firebaseObject){
 
-  console.log(`Loading game data for ${$location.search().gameID}`);
   let init = function(){
+    //todo: Get gameData from/into a service
     const gameID = $location.search().gameID;
+    console.log(`Loading game data for ${gameID}`);
+
     const ref = firebase.database().ref(`games/${gameID}`);
     const gameData = $firebaseObject(ref);
     let playerCount = undefined;
@@ -47,7 +49,10 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', '$fir
 
   $scope.setStyles = function(){
     const playerCount = Object.keys($scope.gameData.players).length;
-    const cardHeight = $window.innerHeight / playerCount;
+    // const toolBarHeightPercent = 0.15;  //Directive toolBar %vh
+    const toolBarHeightPercent = 0;  //Directive toolBar %vh
+    const cardHeightPercent = (100 * (1 - toolBarHeightPercent))  / playerCount; //Individual player info card %vh
+    console.log(playerCount, toolBarHeightPercent, cardHeightPercent);
     $scope.playerStyle = new Array(playerCount);
 
     const colors = [
@@ -61,7 +66,7 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', '$fir
 
     for(let i=0; i<playerCount; i++){
       $scope.playerStyle[i] = {
-        height: cardHeight + 'px',
+        height: cardHeightPercent + 'vh',
         color: 'white',
         border: '8px solid ' + colors[i].border,
         "background-color": colors[i].background
