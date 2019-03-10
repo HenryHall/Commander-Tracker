@@ -1,7 +1,9 @@
 
 /* Main Directive Element Style */
 .editable {
+  cursor: pointer;
   padding: 5px;
+  font-weight: bold;
   /* font-size: 4vmin; */
 }
 

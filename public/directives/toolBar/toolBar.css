@@ -1,27 +1,85 @@
 
-#toolBarHeader {
-  position: absolute;  /* Transition Property */
-  top: -15%;  /* Transition Property */
+.toolBar {
+  height: 50px;
+}
+
+#toolBarMenuScreen {
+  z-index: 10;
+  position: fixed;
+  overflow: auto;
+  top: 0px;
   left: 0px;
-  height: 15vh;
+  height: 100vh;
   width: 100vw;
-  transition: 1s;
-  background-color: rgb(182, 179, 180);
+  background-color: rgba(0, 0, 0, 0.66);
+}
+
+#toolBarMenuScreen.open {
+  display: block;
+}
+
+#toolBarMenuScreen.closed {
+  display: none;
+}
+
+#toolBarHeader {
+  position: absolute;
+  color: white;
+  left: 0px;
+  width: 100vw;
+  transition: .5s;
+  background-color: #4f5b62;
+  border-bottom: 4px solid #263238;
   display: flex;
+  z-index: 20;
+}
+
+#toolBarHeader.closed {
+  top: calc(-50px);  /* Transition Property, .navSection height, leaves border-bottom width visible */
+
 }
 
 #toolBarHeader.open {
-  position: relative; /* Transition Property */
   top: 0%;  /* Transition Property */
 }
 
+#toggleButton {
+  position: absolute;
+  z-index: 21;
+  /* left: 50%; */
+  right: 0px;
+  bottom: -1em;
+  background-color: rgba(0, 0, 0, 0.33);
+  color: rgba(255, 255, 255, 0.33);
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  font-size: 2em;
+}
+
+#toggleButton:hover {
+  background-color: #263238;
+  color: white;
+}
+
 .navSection {
+  display: table;
   margin: auto;
   margin-left: 25px;
+  height: 50px;
 }
 
 .navSectionContent {
+  cursor: pointer;
   height: 100%;
   display: table-cell;
   vertical-align: middle;
+}
+
+.navSectionContent:hover {
+}
+
+.navSectionContent h1 {
+  margin: 0px;
+  font-size: 1.25em;
+  font-weight: bold;
 }

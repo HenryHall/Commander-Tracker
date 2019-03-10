@@ -1,15 +1,4 @@
 
-
-let firebaseConfig = {
-  apiKey: "AIzaSyCYsmtKQXRORf-4ltgadI4DhWpb6reTpJY",
-  authDomain: "commander-tracker.firebaseapp.com",
-  databaseURL: "https://commander-tracker.firebaseio.com",
-  projectId: "commander-tracker",
-  storageBucket: "commander-tracker.appspot.com",
-  messagingSenderId: "382426392851"
-};
-firebase.initializeApp(firebaseConfig);
-
 const overlayApp = angular.module('overlayApp', ['firebase']);
 
 
@@ -21,21 +10,13 @@ overlayApp.config(['$locationProvider', function($locationProvider){
 }]);
 
 
-overlayApp.controller('mainController', ['$scope', '$window', '$location', '$firebaseObject', function($scope, $window, $location, $firebaseObject){
+overlayApp.controller('mainController', ['$scope', '$window', '$location', 'DBService', function($scope, $window, $location, DBService){
 
   let init = function(){
-    //todo: Get gameData from/into a service
-    const gameID = $location.search().gameID;
-    console.log(`Loading game data for ${gameID}`);
-
-    const ref = firebase.database().ref(`games/${gameID}`);
-    const gameData = $firebaseObject(ref);
-    let playerCount = undefined;
-
-    //Ensure data loads, bind it
-    gameData.$loaded().then((data) => {
-      gameData.$bindTo($scope, "gameData").then(() => {
-        //Set CSS, bind resie event
+      //Ensure data loads, bind it
+    DBService.getGameData().$loaded().then((data) => {
+      // console.log(data);
+      data.$bindTo($scope, 'gameData').then(() => {
         $scope.setStyles();
         $window.addEventListener('resize', () => {$scope.setStyles(); $scope.$apply();} );
       });
@@ -43,7 +24,11 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', '$fir
       throw new Error(error);
     });
 
-
+    DBService.getUserData().then((user) => {
+      // console.log("User:", user);
+    }).catch((error) => {
+      throw new Error(error);
+    });
   } //End init
 
 
@@ -52,7 +37,7 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', '$fir
     // const toolBarHeightPercent = 0.15;  //Directive toolBar %vh
     const toolBarHeightPercent = 0;  //Directive toolBar %vh
     const cardHeightPercent = (100 * (1 - toolBarHeightPercent))  / playerCount; //Individual player info card %vh
-    console.log(playerCount, toolBarHeightPercent, cardHeightPercent);
+    // console.log(playerCount, toolBarHeightPercent, cardHeightPercent);
     $scope.playerStyle = new Array(playerCount);
 
     const colors = [
@@ -73,6 +58,16 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', '$fir
       };
     }
   }; //End setStyles
+
+
+  $scope.applyLifeChange = function(playerName, lifeChange){
+    $scope.gameData.players[playerName].life += lifeChange;
+  };
+
+
+  $scope.applyCastChange = function(playerName, castChange){
+    $scope.gameData.players[playerName].castCount += castChange;
+  };
 
 
   $scope.getNameByID = function(id){

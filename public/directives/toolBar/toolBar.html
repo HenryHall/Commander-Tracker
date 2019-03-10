@@ -1,16 +1,21 @@
 
 <div id="toolBar">
 
-  <div id="toolBarHeader" class="">
-    <div class="navSection" ng-repeat="toolBarButton in navItems">
+  <div id="toolBarMenuScreen" class="closed" ng-click="tb.toggleToolBar()"></div>
+
+  <div id="toolBarHeader" class="closed">
+    <div class="navSection" ng-repeat="toolBarItem in tb.navItems">
       <div class="navSectionContent">
-        {{toolBarButton}}
+        <h1 ng-click="toolBarItem.action()">{{toolBarItem.display}}</h1>
       </div>
+    </div>
+
+    <div id="toggleButton" ng-click="tb.toggleToolBar()">
+      <span ng-if="tb.state.open" class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+      <span ng-if="!tb.state.open" class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
     </div>
   </div>
 
-  <div id="toolBarMenuScreen">
-    <div id="toolBarMenu" ng-include="typeView"></div>
-  </div>
+  <div id="toolBarMenu" ng-include="tb.typeView"></div>
 
 </div>

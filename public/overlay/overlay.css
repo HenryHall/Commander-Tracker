@@ -20,6 +20,7 @@ body {
 
 .player {
   color: white;
+  overflow: hidden;
 }
 
 
@@ -34,9 +35,41 @@ body {
 
 
 .cmdrInfo {
-  display: inline-flex;
+  display: flex;
 }
 
+.infoWrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.lifeContainer, .castContainer {
+  width: 50%;
+  height: 100%;
+  position: relative;
+}
+
+.lifeArrow {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  transition: .25s;
+  opacity: 0;   /* Transition Property */
+}
+
+.lifeArrow:hover {
+  opacity: 1;   /* Transition Property */
+}
+
+.up {
+  top: 0px;
+}
+
+.down {
+  bottom: 0px;
+}
 
 .cmdrCast {
   width: 1.5em;
