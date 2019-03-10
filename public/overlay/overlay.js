@@ -34,10 +34,7 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', 'DBSe
 
   $scope.setStyles = function(){
     const playerCount = Object.keys($scope.gameData.players).length;
-    // const toolBarHeightPercent = 0.15;  //Directive toolBar %vh
-    const toolBarHeightPercent = 0;  //Directive toolBar %vh
-    const cardHeightPercent = (100 * (1 - toolBarHeightPercent))  / playerCount; //Individual player info card %vh
-    // console.log(playerCount, toolBarHeightPercent, cardHeightPercent);
+    const cardHeightPercent = 100 / playerCount; //Individual player info card %vh
     $scope.playerStyle = new Array(playerCount);
 
     const colors = [
@@ -52,7 +49,6 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', 'DBSe
     for(let i=0; i<playerCount; i++){
       $scope.playerStyle[i] = {
         height: cardHeightPercent + 'vh',
-        color: 'white',
         border: '8px solid ' + colors[i].border,
         "background-color": colors[i].background
       };
@@ -60,13 +56,13 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', 'DBSe
   }; //End setStyles
 
 
-  $scope.applyLifeChange = function(playerName, lifeChange){
-    $scope.gameData.players[playerName].life += lifeChange;
+  $scope.applyLifeChange = function(playerIndex, lifeChange){
+    $scope.gameData.players[playerIndex].life += lifeChange;
   };
 
 
-  $scope.applyCastChange = function(playerName, castChange){
-    $scope.gameData.players[playerName].castCount += castChange;
+  $scope.applyCastChange = function(playerIndex, castChange){
+    $scope.gameData.players[playerIndex].castCount += castChange;
   };
 
 
