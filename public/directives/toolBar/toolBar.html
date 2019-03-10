@@ -1,12 +1,10 @@
 
 <div id="toolBar">
 
-  <div id="toolBarMenuScreen" class="closed" ng-click="tb.toggleToolBar()"></div>
-
   <div id="toolBarHeader" class="closed">
     <div class="navSection" ng-repeat="toolBarItem in tb.navItems">
-      <div class="navSectionContent">
-        <h1 ng-click="toolBarItem.action()">{{toolBarItem.display}}</h1>
+      <div class="navSectionContent" ng-click="toolBarItem.action($event)">
+        <h1>{{toolBarItem.display}}</h1>
       </div>
     </div>
 
@@ -16,6 +14,11 @@
     </div>
   </div>
 
-  <div id="toolBarMenu" ng-include="tb.typeView"></div>
+
+  <div id="toolBarMenuScreen" class="closed" ng-click="tb.toggleToolBar()">
+    <div id="toolBarMenu" ng-include="tb.state.view"></div>
+  </div>
+
+
 
 </div>

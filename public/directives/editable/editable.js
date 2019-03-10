@@ -60,8 +60,8 @@ overlayApp.directive('editable', function() {
 
       //Set ng-view partial and callback function
       let typeSet = {
-        text: './directives/editable/modalText.html',
-        number: './directives/editable/modalNumber.html'
+        text: './directives/editable/partials/modalText.html',
+        number: './directives/editable/partials/modalNumber.html'
       };
       $scope.typeView = typeSet[$scope.type];
       $scope.operator = {type: '-'};

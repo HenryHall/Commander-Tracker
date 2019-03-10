@@ -15,7 +15,7 @@
 }
 
 #toolBarMenuScreen.open {
-  display: block;
+  display: flex;
 }
 
 #toolBarMenuScreen.closed {
@@ -62,7 +62,7 @@
 
 .navSection {
   display: table;
-  margin: auto;
+  /* margin: auto; */
   margin-left: 25px;
   height: 50px;
 }
@@ -75,10 +75,68 @@
 }
 
 .navSectionContent:hover {
+  color: #01a1ff;
+}
+
+.toolBar .active {
+  color: #01a1ff;
 }
 
 .navSectionContent h1 {
   margin: 0px;
   font-size: 1.25em;
   font-weight: bold;
+}
+
+
+
+/* Modal Style */
+#toolBarMenu {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.toolBar .editModal {
+  width: 90%;
+  height: 80%;
+  margin: auto;
+  border-radius: 5px;
+  color: white;
+  background-color: #4f5b62;
+}
+
+@media (min-width: 576px){
+  .toolBar .editModal {
+    width: 90%;
+    height: 60%;
+  }
+}
+
+@media (min-width: 768px){
+  .toolBar .editModal {
+    width: 75%;
+    height: 60%;
+  }
+}
+
+@media (min-width: 992px){
+  .toolBar .editModal {
+    width: 60%;
+    height: 60%;
+  }
+}
+
+.toolBar .editControlHeader {
+  height: 20%;
+  padding: 10px;
+  font-size: 2em;
+}
+
+.toolBar .editControlRow {
+  height: 23%
+}
+
+.toolBar .massModifyCheckbox {
+  font-size: 1.25em;
 }
