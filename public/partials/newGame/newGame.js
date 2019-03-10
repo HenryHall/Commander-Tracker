@@ -85,7 +85,7 @@ function writeGameData(playersData){
   const gameData = {
     id: gameID,
     date: Date.now().toString(),
-    players: {}
+    players: []
   };
 
 
@@ -97,14 +97,14 @@ function writeGameData(playersData){
     player.damage = opponentsArr;
 
     //Map to gameData
-    gameData.players[player.name] = {
+    gameData.players.push({
       id: player.id,
       name: player.name,
       commander: player.commander,
       life: player.life,
       castCount: 0,
       damage: player.damage
-    };
+    });
   });
 
 

@@ -35,7 +35,7 @@
 }
 
 #toolBarHeader.closed {
-  top: calc(-50px);  /* Transition Property, .navSection height, leaves border-bottom width visible */
+  top: calc(-50px - 4px);  /* Transition Property, .navSection height + border-bottom */
 
 }
 
@@ -46,8 +46,7 @@
 #toggleButton {
   position: absolute;
   z-index: 21;
-  /* left: 50%; */
-  right: 0px;
+  right: 10px;
   bottom: -1em;
   background-color: rgba(0, 0, 0, 0.33);
   color: rgba(255, 255, 255, 0.33);

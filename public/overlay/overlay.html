@@ -14,7 +14,7 @@
     <div id="infoContainer">
       <tool-bar class="toolBar"></tool-bar>
 
-      <div class="player d-flex" ng-style="playerStyle[$index]" ng-repeat="(player, data) in gameData.players">
+      <div class="player d-flex" ng-style="playerStyle[$index]" ng-repeat="(playerIndex, data) in gameData.players">
         <div class="m-auto d-table-cell col-4 col-sm-6 col-md-4">
           <h2 class="pName"><editable type="text" obj="data" prop="name" /></h2>
           <h3 class="pCommander"><editable type="text" obj="data" prop="commander" /></h3>
@@ -22,19 +22,19 @@
 
         <div class="cmdrInfo col-4 col-sm-3">
           <div class="lifeContainer">
-            <div class="lifeArrow up" ng-click="applyLifeChange(player, 1)"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></div>
+            <div class="lifeArrow up" ng-click="applyLifeChange(playerIndex, 1)"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></div>
             <div class="infoWrapper">
               <h1 class="m-auto"><editable type="number" obj="data" prop="life" /></h1>
             </div>
-            <div class="lifeArrow down" ng-click="applyLifeChange(player, -1)"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+            <div class="lifeArrow down" ng-click="applyLifeChange(playerIndex, -1)"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
           </div>
 
           <div class="castContainer">
-            <div class="lifeArrow up" ng-click="applyCastChange(player, 1)"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></div>
+            <div class="lifeArrow up" ng-click="applyCastChange(playerIndex, 1)"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></div>
             <div class="infoWrapper">
               <h1 class="cmdrCast m-auto d-table-cell"><editable type="number" obj="data" prop="castCount" /></h1>
             </div>
-            <div class="lifeArrow down" ng-click="applyCastChange(player, -1)"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+            <div class="lifeArrow down" ng-click="applyCastChange(playerIndex, -1)"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
           </div>
         </div>
 
