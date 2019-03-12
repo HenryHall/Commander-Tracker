@@ -2,17 +2,6 @@
 const myApp = angular.module('homeApp', []);
 
 
-//Used in partials controlled in homeController
-myApp.service('NewGameService', ['$window', function($window) {
-  return {
-    joinGame: function(gameID) {
-      console.log(gameID);
-      $window.location.href = `/joinGame?gameID=${gameID}`;
-    }
-  };
-}]);  //End NewGameService
-
-
 myApp.controller('homeController', ['$scope', function($scope){
 
   $scope.state = undefined;

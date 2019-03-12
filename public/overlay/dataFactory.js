@@ -18,7 +18,6 @@ overlayApp.factory('DBService', ['$location', '$firebaseObject', function myServ
 
   const gameRef = db.ref(`games/${gameID}`);
   const userRef = db.ref(`users/`);
-  // const gameData = $firebaseObject(ref);
 
   return {
     getGameData: function(){ return $firebaseObject(gameRef); },
@@ -26,11 +25,13 @@ overlayApp.factory('DBService', ['$location', '$firebaseObject', function myServ
         firebase.auth().onAuthStateChanged((user) => {
           if(user){
             console.log("Welcome Back");
+            db.ref(`users/${user.uid}/`).child('games').set({[gameID]: true});
             resolve(user);
           } else {
             firebase.auth().signInAnonymously()
             .then((user) => {
               console.log("Welcome, new user");
+              db.ref(`users/${user.uid}/`).child('games').set({[gameID]: true});
               resolve(user);
             }).catch((error) => {
               reject(error);
