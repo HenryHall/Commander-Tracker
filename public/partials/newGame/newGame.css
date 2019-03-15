@@ -5,6 +5,14 @@
   border-radius: 20px;
 }
 
+#playerCount {
+  font-size: 3em !important;
+}
+
+.playerIcon {
+  font-size: 1.75em;
+}
+
 
 #newPlayerAlert {
   text-align: center;

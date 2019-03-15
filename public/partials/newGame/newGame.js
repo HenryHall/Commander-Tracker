@@ -1,33 +1,43 @@
 
 myApp.controller('newGameController', ['$scope', 'NewGameService', function($scope, NewGameService){
   const idGen = idGenerator();
+  const startingPlayerCount = 2;
+  const minPlayers = 2;
+  const maxPlayers = 5;
 
   $scope.alert = false;
   $scope.alertMessage = undefined;
   $scope.players = [];
-  $scope.player = {};
+  $scope.addPlayer = addPlayer;
+  $scope.removePlayer = removePlayer;
+  $scope.startMatch = startMatch;
 
-
-  $scope.addPlayer = function(){
-    if( ($scope.player.name == '' || !$scope.player.name) || ($scope.player.commander == '' || !$scope.player.commander) ){
-      $scope.alertMessage = "Enter values for each field!";
-      $scope.alert = true;
-      return;
-    } else if($scope.players.some((player) => {return player.name == $scope.player.name})) {
-      $scope.alertMessage = "Players must have a unique name!";
-      $scope.alert = true;
-      return;
+  init();
+  function init(){
+    for(var i = 0; i < startingPlayerCount; i++){
+      addPlayer();
     }
+  }
 
-    let player = new Player($scope.player.name, $scope.player.commander);
-    $scope.players.push(player);
-    $scope.player = {};
+
+  function addPlayer(){
+    if($scope.players.length >= maxPlayers){ return; }
+    let newPlayer = new Player($scope.players.length + 1);
+    $scope.players.push(newPlayer);
     $scope.alertMessage = "";
     $scope.alert = false;
-  };  //End addPlayer
+  }
 
 
-  $scope.startMatch = function(){
+  function removePlayer(){
+    if($scope.players.length <= minPlayers){ return; }
+    $scope.players.pop();
+    $scope.alertMessage = "";
+    $scope.alert = false;
+  }
+
+
+  function startMatch(){
     if($scope.players.length < 2){
       $scope.alertMessage = "There must be at least two players to start a match!";
       $scope.alert = true;
@@ -48,10 +58,6 @@ myApp.controller('newGameController', ['$scope', 'NewGameService', function($sco
   };  //End startMatch
 
 
-  $scope.removePlayer = function(index){
-    $scope.players.splice(index, 1);
-  }
-
   //Used to set unique player ids
   function* idGenerator(){
     let i = 0;
@@ -61,11 +67,13 @@ myApp.controller('newGameController', ['$scope', 'NewGameService', function($sco
   }
 
 
-  function Player(name, commander){
-    this.id = idGen.next().value;
-    this.name = name;
-    this.commander = commander;
-    this.life = 40;
+  function Player(playerNumber){
+    return {
+      id: idGen.next().value,
+      name: `Player ${playerNumber}`,
+      commander: `Commander ${playerNumber}`,
+      life: 40
+    }
   }
 
 

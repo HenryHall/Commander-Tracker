@@ -4,40 +4,31 @@
 
   <form id="newPlayerForm" novalidate>
     <div class="form-row">
-      <div class="col">
-        <button class="form-control btn btn-primary btn-lg" ng-click="addPlayer()">Add Player</button>
+      <div class="half m-auto form-row col-12 col-sm-6">
+        <div class="col-12 col-sm-4 text-center">
+          <button class="btn btn-lg btn-primary" ng-click="startMatch()">Start Match</button>
+        </div>
+
+        <div class="col-6 col-sm-4">
+          <button class="btn btn-lg btn-success m-auto" ng-click="addPlayer()">Add Player</button>
+        </div>
+        <div class="col-6 col-sm-4">
+          <button class="btn btn-lg btn-danger m-auto" ng-click="removePlayer()">Remove Player</button>
+        </div>
       </div>
 
-      <div class="col">
-        <button class="form-control btn btn-success btn-lg" ng-click="startMatch()">Start Match</button>
+      <div class="half form-row col-12 col-sm-6 text-center">
+        <label for="playerCount">
+          <span id="playerCount">Players: {{players.length}}</span>
+          <span class="playerIcon glyphicon glyphicon-user" ng-repeat="p in players" aria-hidden="true"></span>
+        </label>
       </div>
-    </div>
-
-    <div class="form-group">
-      <label for="playerNameIn">Name</label>
-      <input id="playerNameIn" type="text" class="form-control" ng-model="player.name">
-    </div>
-
-    <div class="form-group">
-      <label for="playerCmdrIn">Commander</label>
-      <input id="playerCmdrIn" type="text" class="form-control" ng-model="player.commander">
-    </div>
-
-    <div id="newPlayerAlert" ng-if="alert" class="alert alert-danger mt-4 mb-0" role="alert">
-      {{alertMessage}}
     </div>
   </form>
 
-  <h3 class="mt-4 mb-2" ng-if="players.length">Players</h3>
-  <div class="playerCard row m-2" ng-repeat="p in players">
-    <div class="playerIndex col-2 align-middle">
-      {{$index + 1}}
-    </div>
-
-    <div class="col-10">
-      <button class="removePlaryerBtn btn btn-danger" ng-click="removePlayer($index)">Remove</button>
-      <h3>Player: <small>{{p.name}}</small></h3>
-      <h4>Commander: <small>{{p.commander}}</small></h4>
-    </div>
+  <div id="newPlayerAlert" ng-if="alert" class="alert alert-danger mt-4 mb-0" role="alert">
+    {{alertMessage}}
   </div>
+
+
 </div>

@@ -5,27 +5,31 @@
     <title>Live Commander Overlay</title>
 
     <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap-glyphicons.css">
     <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="./partials/newGame/newGame.css">
     <link rel="stylesheet" href="./partials/joinGame/joinGame.css">
   </head>
   <body ng-controller="homeController">
 
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4">Commander Stream</h1>
-        <p class="lead">Create a live, interactive game state tracker for MTG Commander games</p>
+    <div class="header">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Commander Stream</h1>
+          <p class="lead">Create a live, interactive game state tracker for MTG Commander games</p>
+        </div>
       </div>
+
+      <nav class="nav navbar-dark bg-dark nav-pills nav-fill">
+        <li class="nav-item">
+          <a class="nav-link" href="#" ng-click="setActive($event); toggleState(0)">New Game</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" ng-click="setActive($event); toggleState(1)">Join Game</a>
+        </li>
+      </nav>
     </div>
 
-    <nav class="nav navbar-dark bg-dark nav-pills nav-fill">
-      <li class="nav-item">
-        <a class="nav-link" href="#" ng-click="setActive($event); toggleState(0)">New Game</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" ng-click="setActive($event); toggleState(1)">Join Game</a>
-      </li>
-    </nav>
 
     <main>
 
