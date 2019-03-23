@@ -14,24 +14,43 @@ overlayApp.factory('DBService', ['$location', '$firebaseObject', function myServ
   const gameID = $location.search().gameID;
   console.log(`Loading game data for ${gameID}`);
 
+  if(!gameID){ throw new Error('You need to join a specific game!'); }
+
   const db = firebase.database();
 
-  const gameRef = db.ref(`games/${gameID}`);
+  const gameRef = db.ref(`games/${gameID}/players`);
   const userRef = db.ref(`users/`);
+  const seatsRef = db.ref(`games/${gameID}/seatedPlayers/`);
+
 
   return {
-    getGameData: function(){ return $firebaseObject(gameRef); },
+    getPlayerData: function(){
+      let gameObject = undefined;
+
+      try {
+        gameObject = $firebaseObject(gameRef);
+      } catch (e) {
+        throw new Error(e);
+      }
+
+      return gameObject;
+    },
     getUserData: function(){ return new Promise((resolve, reject) => {
+      //Tries to return user obj
         firebase.auth().onAuthStateChanged((user) => {
           if(user){
             console.log("Welcome Back");
-            db.ref(`users/${user.uid}/`).child('games').set({[gameID]: true});
+            // let newGameRef = db.ref(`users/${user.uid}/games/`).push();
+            // newGameRef.set({[gameID]: true});
+            console.log(user.uid);
             resolve(user);
           } else {
             firebase.auth().signInAnonymously()
             .then((user) => {
               console.log("Welcome, new user");
-              db.ref(`users/${user.uid}/`).child('games').set({[gameID]: true});
+              console.log(user.uid);
+              // let newGameRef = db.ref(`users/${user.uid}/games/`).push();
+              // newGameRef.set({[gameID]: true});
               resolve(user);
             }).catch((error) => {
               reject(error);
@@ -39,7 +58,21 @@ overlayApp.factory('DBService', ['$location', '$firebaseObject', function myServ
           }
         });
       });
-    } //End getUserData
+    }, //End getUserData
+    claimSeat: function(){  return new Promise((resolve, reject) => {
+      this.getUserData()
+        .then((user) => {
+          seatsRef.child(user.uid).set(true)
+            .then((data) => {
+              resolve(data);
+            }, function(error){
+              console.log("Shit broke yo.");
+              reject(error);
+            });
+          });
+    })
+
+    }
   };
 
 }]);  //End DBService

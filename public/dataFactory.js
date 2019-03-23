@@ -12,7 +12,6 @@ myApp.service('NewGameService', ['$window', function($window) {
   firebase.initializeApp(config);
 
   const db = firebase.database();
-  let currentUser = undefined;
 
 
   return {
@@ -50,16 +49,16 @@ myApp.service('NewGameService', ['$window', function($window) {
         }
       });
     },
-    setGameData: function(gameData, gameKey){
+    setPlayerData: function(gamePlayer, gameKey){
       // console.log("Setting game data.");
       return new Promise((resolve, reject) => {
-        let newGameRef = db.ref(`games/${gameKey}`);
+        let newGameRef = db.ref(`games/${gameKey}/players/`);
 
-        newGameRef.set(gameData, function(error){
+        newGameRef.set(gamePlayer, function(error){
           if(error){
             //Fail
             console.log(gameKey);
-            reject(`Couldn't setGameData.\n${gameKey}\n${error}`);
+            reject(`Couldn't setPlayerData.\n${gameKey}\n${error}`);
           } else {
             //Success!
             resolve(gameKey);

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap-glyphicons.css">
     <link rel="stylesheet" href="./overlay/overlay.css">
+    <link rel="stylesheet" href="./overlay/modal.css">
     <link rel="stylesheet" href="../directives/editable/editable.css">
     <link rel="stylesheet" href="../directives/toolBar/toolBar.css">
   </head>
@@ -14,7 +15,7 @@
     <div id="infoContainer">
       <tool-bar class="toolBar"></tool-bar>
 
-      <div class="player d-flex" ng-style="playerStyle[$index]" ng-repeat="(playerIndex, data) in gameData.players">
+      <div class="player d-flex" ng-style="playerStyle[$index]" ng-repeat="(playerIndex, data) in playerData">
         <div class="m-auto d-table-cell col-4 col-sm-6 col-md-4">
           <h2 class="pName"><editable type="text" obj="data" prop="name" /></h2>
           <h3 class="pCommander"><editable type="text" obj="data" prop="commander" /></h3>
@@ -40,7 +41,8 @@
 
         <div class="d-flex col-4 col-sm-3 col-md-5">
           <div class="row m-auto">
-            <div ng-repeat="opponent in data.damage track by $index" class="justify-content-between d-inline-flex d-md-table-cell col-12 d-md-block col-md-{{12 / data.damage.length}}">
+            <!-- <div ng-repeat="opponent in data.damage track by $index" class="justify-content-between d-inline-flex d-md-table-cell col-12 d-md-block col-md-{{12 / data.damage.length}}"> -->
+            <div ng-repeat="opponent in data.damage track by $index" class="justify-content-between d-inline-flex d-md-table-cell col d-md-block">
               <h5 class="mb-0 pb-0 text-center font-weight-bold">{{getNameByID(opponent.id)}}</h5>
               <div>
               </div>

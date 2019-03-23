@@ -47,8 +47,8 @@ myApp.controller('newGameController', ['$scope', 'NewGameService', function($sco
     NewGameService.getUserData()
       .then(NewGameService.createGame)
       .then((gameKey) => {
-        let gameData = createGameData($scope.players, gameKey);
-        return NewGameService.setGameData(gameData, gameKey);
+        let playerData = createPlayerData($scope.players, gameKey);
+        return NewGameService.setPlayerData(playerData, gameKey);
       })
       .then(NewGameService.joinGame)
       //Leave page for overlay
@@ -77,23 +77,19 @@ myApp.controller('newGameController', ['$scope', 'NewGameService', function($sco
   }
 
 
-  //Adds gameData to Firebase and returns new promise that resolves gameID
-  function createGameData(playersData, gameKey){
-    const gameData = {
-      id: gameKey,
-      date: Date.now().toString(),
-      players: []
-    };
+  //Formats data for Firebase
+  function createPlayerData(playersData, gameKey){
+    const gameData = [];
 
-    //Create gameData
+    //Create data for players
     playersData.forEach( (player) => {
-      //Set damage object
+      //Set player damage object
       let opponentsData = playersData.filter((p) => {return p.id == player.id ? false : true;});
       let opponentsArr = opponentsData.map((opponent) => {return {id: opponent.id, damage: 0}; });
       player.damage = opponentsArr;
 
       //Map to gameData
-      gameData.players.push({
+      gameData.push({
         id: player.id,
         name: player.name,
         commander: player.commander,
@@ -104,7 +100,7 @@ myApp.controller('newGameController', ['$scope', 'NewGameService', function($sco
     });
 
     return gameData;
-  } //End createGameData
+  } //End createPlayerData
 
 
 }]);

@@ -15,10 +15,8 @@
   </div>
 
 
-  <div id="toolBarMenuScreen" class="closed" ng-click="tb.toggleToolBar()">
-    <div id="toolBarMenu" ng-include="tb.state.view"></div>
+  <div id="toolBarMenuScreen" class="modalScreen closed" ng-click="tb.toggleToolBar()">
+    <div class="modalContainer" ng-click="$event.stopPropagation()" ng-include="tb.state.view"></div>
   </div>
-
-
 
 </div>

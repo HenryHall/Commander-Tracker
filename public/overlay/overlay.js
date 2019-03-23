@@ -14,9 +14,9 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', 'DBSe
 
   let init = function(){
       //Ensure data loads, bind it
-    DBService.getGameData().$loaded().then((data) => {
+    DBService.getPlayerData().$loaded().then((data) => {
       // console.log(data);
-      data.$bindTo($scope, 'gameData').then(() => {
+      data.$bindTo($scope, 'playerData').then(() => {
         $scope.setStyles();
         $window.addEventListener('resize', () => {$scope.setStyles(); $scope.$apply();} );
       });
@@ -33,7 +33,13 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', 'DBSe
 
 
   $scope.setStyles = function(){
-    const playerCount = Object.keys($scope.gameData.players).length;
+    let playerCount = 0;
+    for(key in $scope.playerData){
+      if(key.charAt(0) !== '$'){
+        playerCount++;
+      }
+    }
+
     const cardHeightPercent = 100 / playerCount; //Individual player info card %vh
     $scope.playerStyle = new Array(playerCount);
 
@@ -57,20 +63,29 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', 'DBSe
 
 
   $scope.applyLifeChange = function(playerIndex, lifeChange){
-    $scope.gameData.players[playerIndex].life += lifeChange;
+    $scope.playerData[playerIndex].life += lifeChange;
   };
 
 
   $scope.applyCastChange = function(playerIndex, castChange){
-    $scope.gameData.players[playerIndex].castCount += castChange;
+    $scope.playerData[playerIndex].castCount += castChange;
   };
 
 
   $scope.getNameByID = function(id){
-    for(player in $scope.gameData.players){
-      if($scope.gameData.players[player].id == id) return $scope.gameData.players[player].name;
+    for(player in $scope.playerData){
+      if($scope.playerData[player].id == id) return $scope.playerData[player].name;
     }
   };
+
+
+  $scope.claimSeat = function(){
+    DBService.claimSeat().then((res) => {
+      console.log("Claim Seat Success!");
+    }, function(error){
+      console.log("Claim Seat Fail.");
+    });
+  }
 
 
   //Init

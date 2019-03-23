@@ -3,10 +3,10 @@
   <div class="h-100">
 
     <!--Modal Row 1 -->
-    <div class="editControlHeader row text-center">
+    <div class="modalHeader row text-center">
       <!-- Input Display -->
       <div class="row col-12 col-sm-5 col-md-4 d-table-cell m-auto">
-        <h1 class="display-4">{{value}}</h1>
+        <span class="textHeaderValue">{{value}}</span>
       </div>
 
       <!-- Glyphicon Arrow -->
@@ -21,13 +21,12 @@
 
       <!-- Output Display -->
       <div class="col-12 col-sm-5 col-md-4 d-table-cell m-auto">
-        <h1 class="display-4">{{numberUpdate()}}</h1>
+        <span class="textHeaderValue">{{numberUpdate()}}</span>
       </div>
     </div>
 
     <!-- Row 2 -->
-    <div class="editControlRow row justify-content-md-center">
-
+    <div class="modalBody">
       <div class="btn-group row col-4 m-auto" data-toggle="buttons">
         <label class="d-flex btn btn-lg btn-primary nbrRadio col-12 col-sm-6">
           <div class="m-auto">
@@ -45,7 +44,7 @@
     </div>
 
     <!-- Row 3 -->
-    <div class="editControlRow row">
+    <div class="modalFooter row">
       <button class="col-12 col-sm-5 col-md-4 btn btn-lg btn-primary editSubmitBtn" ng-click="cb(true); $event.stopPropagation()">Submit</button>
       <button class="col-12 col-sm-5 col-md-4 btn btn-lg btn-danger editCancelBtn" ng-click="cb(false); $event.stopPropagation()">Cancel</button>
     </div>
