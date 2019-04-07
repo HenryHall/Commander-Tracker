@@ -13,32 +13,34 @@ overlayApp.config(['$locationProvider', function($locationProvider){
 overlayApp.controller('mainController', ['$scope', '$window', '$location', 'DBService', function($scope, $window, $location, DBService){
 
   let init = function(){
-      //Ensure data loads, bind it
-    DBService.getPlayerData().$loaded().then((data) => {
-      // console.log(data);
-      data.$bindTo($scope, 'playerData').then(() => {
+    //Ensure data loads, bind it
+    DBService.getPlayerData().then((playerPromises) => {
+      Promise.all(playerPromises).then((loadedPlayerData) => {
+        let bindingPromises = [];
+        $scope.playerData = loadedPlayerData;
+
+        $scope.playerData.forEach((player, index) => {
+          let playerBind = player.$bindTo($scope, `playerData[${index}]`);
+          bindingPromises.push(playerBind);
+        });
+
+        return Promise.all(bindingPromises);
+      })
+      .then(() => {
+        $scope.$apply();
         $scope.setStyles();
         $window.addEventListener('resize', () => {$scope.setStyles(); $scope.$apply();} );
+      })
+      .catch((error) => {
+        console.log("Something when wrong while loading player data!");
+        console.log(error);
       });
-    }).catch((error) => {
-      throw new Error(error);
-    });
-
-    DBService.getUserData().then((user) => {
-      // console.log("User:", user);
-    }).catch((error) => {
-      throw new Error(error);
-    });
+    }); //End player data loading and binding
   } //End init
 
 
   $scope.setStyles = function(){
-    let playerCount = 0;
-    for(key in $scope.playerData){
-      if(key.charAt(0) !== '$'){
-        playerCount++;
-      }
-    }
+    let playerCount = $scope.playerData.length;
 
     const cardHeightPercent = 100 / playerCount; //Individual player info card %vh
     $scope.playerStyle = new Array(playerCount);
@@ -73,20 +75,18 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', 'DBSe
 
 
   $scope.getNameByID = function(id){
-    for(player in $scope.playerData){
-      if($scope.playerData[player].id == id) return $scope.playerData[player].name;
-    }
+    let player = $scope.playerData.find((p) => { return p.id == id ? true : false; });
+    return player.name;
   };
 
 
-  $scope.claimSeat = function(){
-    DBService.claimSeat().then((res) => {
-      console.log("Claim Seat Success!");
-    }, function(error){
-      console.log("Claim Seat Fail.");
-    });
+  $scope.incrimentTestPlayer = function(playerIndex){
+    console.log(`${playerIndex} from incrimentTestPlayer.`);
+    console.log(`${$scope.playerData[playerIndex]}`);
+    console.log(`Before: ${$scope.playerData[playerIndex].life}`);
+    $scope.playerData[playerIndex].life++;
+    console.log(`After: ${$scope.playerData[playerIndex].life}`);
   }
-
 
   //Init
   init();

@@ -56,7 +56,7 @@ body {
   text-align: center;
   font-size: 2em;
   transition: .25s;
-  opacity: 0;   /* Transition Property */
+  opacity: .1;   /* Transition Property */
 }
 
 .lifeArrow:hover {

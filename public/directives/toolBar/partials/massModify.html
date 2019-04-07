@@ -10,7 +10,7 @@
     <div class="m-auto">
 
       <div class="row">
-        <div class="col-6 col-sm-4 col-md-3" ng-repeat="player in tb.playerData">
+        <div class="col-6 col-sm-4 col-md-3" ng-repeat="player in tb.playerData.players">
           <label class="massModifyCheckbox"><input type="checkbox" ng-model="tb.massModify.selected[player.id]" value="player.id"> {{player.name}}</label>
         </div>
       </div>

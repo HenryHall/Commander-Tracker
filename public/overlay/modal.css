@@ -47,7 +47,7 @@
   top: 0px;
   width: 105%;
   height: 20%;
-  padding: 10px;
+  padding: 15px;
   background-color: #263238;
   border-radius: 5px;
 }
@@ -58,6 +58,7 @@
 
 .modalBody {
   display: flex;
+  padding: 15px;
   height: 60%;
   /* margin: 15px 15px 0px 15px; */
 }

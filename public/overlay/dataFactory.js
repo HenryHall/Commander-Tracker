@@ -18,37 +18,44 @@ overlayApp.factory('DBService', ['$location', '$firebaseObject', function myServ
 
   const db = firebase.database();
 
-  const gameRef = db.ref(`games/${gameID}/players`);
+  const playersRef = db.ref(`games/${gameID}/players/`);
   const userRef = db.ref(`users/`);
-  const seatsRef = db.ref(`games/${gameID}/seatedPlayers/`);
 
 
   return {
     getPlayerData: function(){
-      let gameObject = undefined;
+      //Gets the keys to make player references, make them firebase objects.  return for loading
+      return new Promise((resolve, reject) => {
+        playersRef.once('value').then((snap) => {
+          let playerRefArr = [];
 
-      try {
-        gameObject = $firebaseObject(gameRef);
-      } catch (e) {
-        throw new Error(e);
-      }
+          snap.forEach((playerObj) => {
+            let playerKey = playerObj.key;
+            let playerRef = playersRef.child(playerKey);
+            playerRefArr.push( $firebaseObject(playerRef).$loaded() );
+          });
 
-      return gameObject;
+          resolve(playerRefArr);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+      });
     },
     getUserData: function(){ return new Promise((resolve, reject) => {
-      //Tries to return user obj
+      //Tries to return a user obj
         firebase.auth().onAuthStateChanged((user) => {
           if(user){
             console.log("Welcome Back");
             // let newGameRef = db.ref(`users/${user.uid}/games/`).push();
             // newGameRef.set({[gameID]: true});
-            console.log(user.uid);
+            // console.log(user.uid);
             resolve(user);
           } else {
             firebase.auth().signInAnonymously()
             .then((user) => {
               console.log("Welcome, new user");
-              console.log(user.uid);
+              // console.log(user.uid);
               // let newGameRef = db.ref(`users/${user.uid}/games/`).push();
               // newGameRef.set({[gameID]: true});
               resolve(user);
@@ -59,20 +66,19 @@ overlayApp.factory('DBService', ['$location', '$firebaseObject', function myServ
         });
       });
     }, //End getUserData
-    claimSeat: function(){  return new Promise((resolve, reject) => {
+    register: function(username){  return new Promise((resolve, reject) => {
       this.getUserData()
         .then((user) => {
-          seatsRef.child(user.uid).set(true)
-            .then((data) => {
-              resolve(data);
+          let registerRef = db.ref(`users/${user.uid}/username/`);
+          registerRef.set(username)
+            .then(() => {
+              resolve();
             }, function(error){
               console.log("Shit broke yo.");
               reject(error);
             });
           });
-    })
-
-    }
+    })}
   };
 
 }]);  //End DBService

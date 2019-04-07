@@ -15,34 +15,33 @@
     <div id="infoContainer">
       <tool-bar class="toolBar"></tool-bar>
 
-      <div class="player d-flex" ng-style="playerStyle[$index]" ng-repeat="(playerIndex, data) in playerData">
+      <div class="player d-flex" ng-style="playerStyle[$index]" ng-repeat="player in playerData">
         <div class="m-auto d-table-cell col-4 col-sm-6 col-md-4">
-          <h2 class="pName"><editable type="text" obj="data" prop="name" /></h2>
-          <h3 class="pCommander"><editable type="text" obj="data" prop="commander" /></h3>
+          <h2 class="pName"><editable type="text" obj="player" prop="name" /></h2>
+          <h3 class="pCommander"><editable type="text" obj="player" prop="commander" /></h3>
         </div>
 
         <div class="cmdrInfo col-4 col-sm-3">
           <div class="lifeContainer">
-            <div class="lifeArrow up" ng-click="applyLifeChange(playerIndex, 1)"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></div>
+            <div class="lifeArrow up" ng-click="applyLifeChange($index, 1)"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></div>
             <div class="infoWrapper">
-              <h1 class="m-auto"><editable type="number" obj="data" prop="life" /></h1>
+              <h1 class="m-auto"><editable type="number" obj="player" prop="life" /></h1>
             </div>
-            <div class="lifeArrow down" ng-click="applyLifeChange(playerIndex, -1)"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+            <div class="lifeArrow down" ng-click="applyLifeChange($index, -1)"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
           </div>
 
           <div class="castContainer">
-            <div class="lifeArrow up" ng-click="applyCastChange(playerIndex, 1)"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></div>
+            <div class="lifeArrow up" ng-click="applyCastChange($index, 1)"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></div>
             <div class="infoWrapper">
-              <h1 class="cmdrCast m-auto d-table-cell"><editable type="number" obj="data" prop="castCount" /></h1>
+              <h1 class="cmdrCast m-auto d-table-cell"><editable type="number" obj="player" prop="castCount" /></h1>
             </div>
-            <div class="lifeArrow down" ng-click="applyCastChange(playerIndex, -1)"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+            <div class="lifeArrow down" ng-click="applyCastChange($index, -1)"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
           </div>
         </div>
 
         <div class="d-flex col-4 col-sm-3 col-md-5">
           <div class="row m-auto">
-            <!-- <div ng-repeat="opponent in data.damage track by $index" class="justify-content-between d-inline-flex d-md-table-cell col-12 d-md-block col-md-{{12 / data.damage.length}}"> -->
-            <div ng-repeat="opponent in data.damage track by $index" class="justify-content-between d-inline-flex d-md-table-cell col d-md-block">
+            <div ng-repeat="opponent in player.damage track by $index" class="justify-content-between d-inline-flex d-md-table-cell col-12 d-md-block col-md-{{12 / player.damage.length}}">
               <h5 class="mb-0 pb-0 text-center font-weight-bold">{{getNameByID(opponent.id)}}</h5>
               <div>
               </div>

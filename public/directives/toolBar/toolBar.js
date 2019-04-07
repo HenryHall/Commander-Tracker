@@ -9,7 +9,6 @@ overlayApp.directive('toolBar', function() {
     controller: ['$scope', '$element', 'DBService', function($scope, $element, DBService){
 
       let tb = this;
-      tb.test = "UNDER CONSTRUCTION";
 
       tb.playerData = undefined;
       tb.state = {
@@ -23,15 +22,26 @@ overlayApp.directive('toolBar', function() {
 
       init();
       function init(){
-        //Ensure data loads, bind it
-        DBService.getPlayerData().$loaded().then((data) => {
-          // console.log(data);
-          data.$bindTo($scope, 'tb.playerData').then(() => {
-            //Things after data is ready
+        DBService.getPlayerData().then((playerPromises) => {
+          Promise.all(playerPromises).then((loadedPlayerData) => {
+            let bindingPromises = [];
+            tb.playerData = loadedPlayerData;
+
+            tb.playerData.forEach((player, index) => {
+              console.log("Breaks Here");
+              //See:
+              //https://stackoverflow.com/questions/27367289/firebase-3-way-data-binding-with-controlleras-syntax
+              let playerBind = player.$bindTo(tb, `playerData[${index}]`);
+              bindingPromises.push(playerBind);
+            });
+
+            return Promise.all(bindingPromises);
+          })
+          .catch((error) => {
+            console.log("Something when wrong while loading player data!");
+            console.log(error);
           });
-        }).catch((error) => {
-          throw new Error(error);
-        });
+        }); //End player data loading and binding
       }
 
 
@@ -65,6 +75,7 @@ overlayApp.directive('toolBar', function() {
 
 
       let tbViews = [
+        './directives/toolBar/partials/register.html',
         './directives/toolBar/partials/massModify.html',
         './directives/toolBar/partials/playerSettings.html',
         './directives/toolBar/partials/history.html',
@@ -93,15 +104,32 @@ overlayApp.directive('toolBar', function() {
 
       tb.navItems = [
         {display: 'Close', action: tb.toggleToolBar},
-        {display: 'Mass Modify', action: function(e){ toggleMenuModal(0); setActive(e); }},
-        {display: 'Player Settings', action: function(e){ toggleMenuModal(1); setActive(e); }},
-        {display: 'History', action: function(e){ toggleMenuModal(2); setActive(e); }},
-        {display: 'Reset', action: function(e){ toggleMenuModal(3); setActive(e); }}
+        {display: 'Register', action: function(e){ toggleMenuModal(0); setActive(e); }},
+        {display: 'Mass Modify', action: function(e){ toggleMenuModal(1); setActive(e); }},
+        {display: 'Player Settings', action: function(e){ toggleMenuModal(2); setActive(e); }},
+        {display: 'History', action: function(e){ toggleMenuModal(3); setActive(e); }},
+        {display: 'Reset', action: function(e){ toggleMenuModal(4); setActive(e); }}
       ];
     // End toolBarHeader Section
 
-    // Start massModifyModal Section
+    //Start registerModal Controller
+      // Init
+      let registerScope = {};
+      tb.registerScope = registerScope;
 
+      registerScope.register = function(){
+        let username = tb.registerScope.usernameEntry;
+        console.log(`Trying to register as ${username}.`);
+        DBService.register(username).then(() => {
+          console.log(`Thanks for registering to this game.`);
+        }, function(error) {
+          console.log("Something when wrong while trying to register!");
+        });
+      }
+    //End registerModalController
+
+
+    // Start massModifyModal Section
       //Init
       let massModify = {};
       tb.massModify = massModify;
@@ -112,7 +140,7 @@ overlayApp.directive('toolBar', function() {
         for(playerID in massModify.selected){
           if(massModify.selected[playerID]){
             //Is checked
-            let player = tb.playerData.find((p) => {return p.id === parseInt(playerID);});
+            let player = tb.playerData.players.find((p) => {return p.id === parseInt(playerID);});
             player.life += (massModify.value * (massModify.operator.type === '+' ? 1 : -1));
           }
         }
@@ -130,7 +158,7 @@ overlayApp.directive('toolBar', function() {
     tb.resetModal = resetModal;
 
     resetModal.reset = function(){
-      tb.playerData.forEach((player) => {
+      tb.playerData.players.forEach((player) => {
         player.castCount = 0;
         player.life = 40;
         player.damage.forEach((opponent) => {

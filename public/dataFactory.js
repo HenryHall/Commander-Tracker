@@ -35,7 +35,6 @@ myApp.service('NewGameService', ['$window', function($window) {
       });
     }, //End getUserData
     createGame: function(user){
-      // console.log("Creating new user game.");
       return new Promise((resolve, reject) => {
         try {
           let userGamesRef = db.ref(`users/${user.uid}/games`);
@@ -49,24 +48,32 @@ myApp.service('NewGameService', ['$window', function($window) {
         }
       });
     },
-    setPlayerData: function(gamePlayer, gameKey){
-      // console.log("Setting game data.");
-      return new Promise((resolve, reject) => {
-        let newGameRef = db.ref(`games/${gameKey}/players/`);
+    setPlayerData: function(playerData, gameKey){
+      let newGameRef = db.ref(`games/${gameKey}/players/`);
+      let playerPromises = [];
 
-        newGameRef.set(gamePlayer, function(error){
-          if(error){
-            //Fail
-            console.log(gameKey);
-            reject(`Couldn't setPlayerData.\n${gameKey}\n${error}`);
-          } else {
-            //Success!
-            resolve(gameKey);
-          }
+      playerData.forEach((player) => {
+        let playerRef = newGameRef.push();
+        let playerPromise = new Promise((resolve, reject) => {
+          playerRef.set(player, function(error){
+            if(error){
+              //Fail
+              console.log(gameKey);
+              reject(`Couldn't setPlayerData.\n${gameKey}\n${error}`);
+            } else {
+              //Success, added new player
+              resolve(gameKey);
+            }
+          });
         });
+
+        playerPromises.push(playerPromise);
       });
+
+      return Promise.all(playerPromises);
     },
-    joinGame: function(gameKey) {
+    joinGame: function(gameKeys) {
+      let gameKey = gameKeys[0];  //Array from Promise.all(), use any value
       console.log(`Joining game ${gameKey}...`);
       $window.location.href = `/joinGame?gameID=${gameKey}`;
     }
