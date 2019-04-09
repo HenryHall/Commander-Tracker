@@ -1,5 +1,5 @@
 
-<div class="h-100">
+<div class="modalContent" ng-controller="resetController">
   <div class="modalHeader row text-center">
       <div class="modalHeaderText row m-auto">
         Reset
@@ -13,7 +13,7 @@
   </div>
 
   <div class="modalFooter row">
-    <button class="m-auto col-12 col-sm-5 col-md-4 btn btn-lg btn-primary" ng-click="tb.resetModal.reset(); $event.stopPropagation()">Confirm</button>
-    <button class="m-auto col-12 col-sm-5 col-md-4 btn btn-lg btn-danger" ng-click="tb.resetModal.cancel(); $event.stopPropagation()">Cancel</button>
+    <button class="m-auto col-12 col-sm-5 col-md-4 btn btn-lg btn-primary" ng-click="reset(); $event.stopPropagation()">Confirm</button>
+    <button class="m-auto col-12 col-sm-5 col-md-4 btn btn-lg btn-danger" ng-click="cancel(); $event.stopPropagation()">Cancel</button>
   </div>
 </div>

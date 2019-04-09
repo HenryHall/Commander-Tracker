@@ -1,0 +1,12 @@
+
+
+.registerBodyText {
+  font-size: 1.5em;
+  text-align: center;
+  margin: 3em;
+}
+
+#registerBodyUsername {
+  font-weight: 600;
+  color: #01a1ff;
+}

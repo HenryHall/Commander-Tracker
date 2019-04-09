@@ -21,6 +21,35 @@ overlayApp.factory('DBService', ['$location', '$firebaseObject', function myServ
   const playersRef = db.ref(`games/${gameID}/players/`);
   const userRef = db.ref(`users/`);
 
+  function getUserObj(){
+    //todo:  Rework, this sucks
+    return new Promise((resolve, reject) => {
+      //Tries to return a user obj for auth db
+      firebase.auth().onAuthStateChanged((user) => {
+        if(user){
+          console.log("Welcome Back");
+
+          //Add the game to the users records
+          // let newGameRef = db.ref(`users/${user.uid}/games/`).push();
+          // newGameRef.set({[gameID]: true});
+
+          console.log(user.uid);
+          resolve(user);
+        } else {
+          console.log("No user");
+          firebase.auth().signInAnonymously()
+          .then((user) => {
+            console.log("Created user");
+            resolve(user);
+          }).catch((error) => {
+            console.log("Fail Here");
+            reject(error);
+          });
+        }
+      });
+    });
+  }
+
 
   return {
     getPlayerData: function(){
@@ -42,43 +71,44 @@ overlayApp.factory('DBService', ['$location', '$firebaseObject', function myServ
         });
       });
     },
-    getUserData: function(){ return new Promise((resolve, reject) => {
-      //Tries to return a user obj
-        firebase.auth().onAuthStateChanged((user) => {
+    getUserObj: getUserObj,  //End getUserObj
+    getUserData: function(){
+      return new Promise((resolve, reject) => {
+        //Tries to return a user in Commander Tracker app db
+        getUserObj().then((user) => {
           if(user){
-            console.log("Welcome Back");
-            // let newGameRef = db.ref(`users/${user.uid}/games/`).push();
-            // newGameRef.set({[gameID]: true});
-            // console.log(user.uid);
-            resolve(user);
-          } else {
-            firebase.auth().signInAnonymously()
-            .then((user) => {
-              console.log("Welcome, new user");
-              // console.log(user.uid);
-              // let newGameRef = db.ref(`users/${user.uid}/games/`).push();
-              // newGameRef.set({[gameID]: true});
-              resolve(user);
-            }).catch((error) => {
+            //todo: get more than username
+            userRef.child(`${user.uid}/username`).once('value').then((snap) => {
+              console.log(`aka ${snap.val()}`);
+              resolve(snap.val());
+            })
+            .catch((error) => {
+              console.log("Failed to get username in getUserData while trying to query the node.");
               reject(error);
             });
+          } else {
+            reject("Could not create user object.");
           }
+        })
+        .catch((error) => {
+          console.log("Could not get user object from dataservice getUsername.");
+          resolve(error);
         });
       });
     }, //End getUserData
-    register: function(username){  return new Promise((resolve, reject) => {
-      this.getUserData()
-        .then((user) => {
-          let registerRef = db.ref(`users/${user.uid}/username/`);
-          registerRef.set(username)
-            .then(() => {
-              resolve();
-            }, function(error){
-              console.log("Shit broke yo.");
-              reject(error);
-            });
-          });
-    })}
+    register: function(username){
+      return new Promise((resolve, reject) => {
+        getUserObj().then((user) => {
+          let registerRef = userRef.child(`${user.uid}/username`);
+          return registerRef.set(username)
+        })
+        .then(() => {
+          resolve(username);
+        }, function(error){
+          console.log("Shit broke yo.");
+          reject(error);
+        });
+      })} //End register
   };
 
 }]);  //End DBService

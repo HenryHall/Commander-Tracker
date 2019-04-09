@@ -25,7 +25,6 @@ overlayApp.directive('editable', function() {
 
 
       $scope.setValue = function(newValue){
-        console.log("New value:", newValue);
 
         modal.detach();
         modal = getModal();
@@ -81,7 +80,7 @@ overlayApp.directive('editable', function() {
       }
 
       $scope.cb = function(changeVal){
-        console.log("Send value?", changeVal, $scope.valueOut);
+        // console.log("Send value?", changeVal, $scope.valueOut);
         if(changeVal){
           $scope.callback({value: $scope.valueOut});
         } else {

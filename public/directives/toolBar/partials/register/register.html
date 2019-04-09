@@ -1,0 +1,48 @@
+
+<div class="modalContent" ng-controller="registerController">
+  <div class="modalHeader row text-center">
+    <div class="modalHeaderText row m-auto">
+      Register
+    </div>
+  </div>
+
+  <div class="modalBody row d-flex">
+    <div ng-if="!username" class="h-100 w-100 d-flex">
+      <!-- DISPLAY IF USER IS NOT LOGGED IN -->
+      <div class="m-auto">
+        <div class="row">
+          <p class="modalBodyText">Register under a username:</p>
+        </div>
+
+        <div class="row">
+          <input autofocus maxlength="20" class="m-auto form-control" type="text" ng-model="newusername.value" placeholder="20 characters or less" >
+        </div>
+      </div>
+    </div>
+
+
+    <div ng-if="username" class="h-100 w-100 d-flex">
+      <!-- DISPLAY IF USER IS LOGGED IN -->
+      <div class="m-auto">
+        <div class="row">
+          <p class="registerBodyText">Thanks for registering to this game, you now have write permissions!  Your changes to the history will be recorded under <span id="registerBodyUsername">{{username}}</span>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISPLAY IF USER IS NOT LOGGED IN -->
+  <div ng-if="!username">
+    <div class="modalFooter">
+      <button class="m-auto col-12 col-sm-5 col-md-4 btn btn-lg btn-primary" ng-click="register(); $event.stopPropagation()">Submit</button>
+      <button class="m-auto col-12 col-sm-5 col-md-4 btn btn-lg btn-danger" ng-click="toggleToolBar(); $event.stopPropagation()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- DISPLAY IF USER IS LOGGED IN -->
+  <div ng-if="username">
+    <div class="modalFooter">
+      <button class="m-auto col-12 col-sm-5 col-md-4 btn btn-lg btn-primary" ng-click="toggleToolBar(); $event.stopPropagation()">Okay</button>
+    </div>
+  </div>
+</div>
