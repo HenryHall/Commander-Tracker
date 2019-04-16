@@ -60,6 +60,22 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', 'DBSe
         border: '8px solid ' + colors[i].border,
         "background-color": colors[i].background
       };
+      //Try to get commander image for each player, use fallback if it cannot be found
+      // let commanderName = $scope.playerData[i].commander;
+      //
+      // DBService.getImageURL(commanderName).then((imgUrl) => {
+      //   $scope.playerStyle[i].backgroundImage = `url(${imgUrl})`;
+      //   $scope.playerStyle[i].backgroundSize = '50%';
+      //   $scope.playerStyle[i].backgroundPosition = 'center top';
+      //   // $scope.playerStyle[i] = {
+      //   //   height: '100%',
+      //   //   "background": `no-repeat top center/100% url(${imgUrl})`
+      //   // }
+      // })
+      // .catch((error) => {
+      //   console.log(error);
+      //   console.log(`Could not set commander image for ${commanderName}.  Using fallback`);
+      // });
     }
   }; //End setStyles
 

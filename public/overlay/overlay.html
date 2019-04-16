@@ -18,8 +18,8 @@
       <tool-bar class="toolBar"></tool-bar>
 
       <div class="player d-flex" ng-style="playerStyle[$index]" ng-repeat="player in playerData">
-        <div class="m-auto d-table-cell col-4 col-sm-6 col-md-4">
-          <h2 class="pName"><editable type="text" obj="player" prop="name" /></h2>
+        <div ng-style="playerStyle[$index].commanderStyle" class="m-auto d-table-cell col-4 col-sm-6 col-md-4">
+          <h2 class="pName"><editable type="text" obj="player" prop="name"/></h2>
           <h3 class="pCommander"><editable type="text" obj="player" prop="commander" /></h3>
         </div>
 

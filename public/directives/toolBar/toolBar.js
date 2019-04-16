@@ -16,6 +16,7 @@ overlayApp.directive('toolBar', function() {
       $scope.toggleToolBar = toggleToolBar;
       $scope.setActive = setActive;
       $scope.toggleMenuModal = toggleMenuModal;
+      $scope.setUsername = setUsername;
       $scope.getUserData = DBService.getUserData;
       $scope.getPlayerData = DBService.getPlayerData;
 
@@ -23,7 +24,7 @@ overlayApp.directive('toolBar', function() {
       function init(){
         //Get user data
         $scope.getUserData().then((username) => {
-          $scope.username = username;
+          $scope.setUsername(username);
         })
         .catch((error) => {
           console.log("Could not get user data for the toolbar!");
@@ -50,7 +51,6 @@ overlayApp.directive('toolBar', function() {
       }
 
 
-      // Start toolBarHeader Section
       function toggleToolBar(){
         let $tb =  $element[0].querySelectorAll('#toolBarHeader')[0];
         let $screen = $element[0].querySelectorAll('#toolBarMenuScreen')[0];
@@ -110,10 +110,18 @@ overlayApp.directive('toolBar', function() {
       };
 
 
-       function setActive(e){
-         removeActive();
-         e.target.classList.add('active');
-       };
+      function setActive(e){
+        removeActive();
+        e.target.classList.add('active');
+      };
+
+
+      function setUsername(username){
+        $scope.username = username;
+        $scope.$apply();
+      }
+
+
 
     }]  //End Controller
   }
