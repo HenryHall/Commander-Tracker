@@ -7,15 +7,18 @@
     <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap-glyphicons.css">
     <link rel="stylesheet" href="./overlay/overlay.css">
     <link rel="stylesheet" href="./overlay/modal.css">
+    <link rel="stylesheet" href="./overlay/menu.css">
     <link rel="stylesheet" href="../directives/editable/editable.css">
     <link rel="stylesheet" href="../directives/toolBar/toolBar.css">
+    <link rel="stylesheet" href="../directives/cardView/cardView.css">
     <link rel="stylesheet" href="../directives/toolBar/partials/massModify/massModify.css">
     <link rel="stylesheet" href="../directives/toolBar/partials/register/register.css">
   </head>
   <body ng-controller="mainController">
 
     <div id="infoContainer">
-      <tool-bar class="toolBar"></tool-bar>
+      <tool-bar id="toolBar"></tool-bar>
+      <!-- <card-view id="cardView"></card-view> -->
 
       <div class="player d-flex" ng-style="playerStyle[$index]" ng-repeat="player in playerData">
         <div ng-style="playerStyle[$index].commanderStyle" class="m-auto d-table-cell col-4 col-sm-6 col-md-4">
@@ -71,6 +74,7 @@
     <script src="./overlay/dataFactory.js" charset="utf-8"></script>
     <script src="../directives/editable/editable.js" charset="utf-8"></script>
     <script src="../directives/toolBar/toolBar.js" charset="utf-8"></script>
+    <script src="../directives/cardView/cardView.js" charset="utf-8"></script>
 
     <script src="../directives/toolBar/partials/history/history.js" charset="utf-8"></script>
     <script src="../directives/toolBar/partials/massModify/massModify.js" charset="utf-8"></script>

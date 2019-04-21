@@ -1,0 +1,25 @@
+
+.menuOutter {
+}
+
+.menuElement {
+  color: white;
+  transition: .5s;
+  background-color: #4f5b62;
+  display: flex;
+  position: absolute;
+  z-index: 20;
+}
+
+.menuToggleButton {
+  position: absolute;
+  z-index: 21;
+  background-color: rgba(0, 0, 0, 0.33);
+  color: rgba(255, 255, 255, 0.33);
+  font-size: 2em;
+}
+
+.menuToggleButton:hover {
+  background-color: #263238;
+  color: white;
+}

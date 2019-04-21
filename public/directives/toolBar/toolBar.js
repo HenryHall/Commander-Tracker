@@ -53,7 +53,7 @@ overlayApp.directive('toolBar', function() {
 
       function toggleToolBar(){
         let $tb =  $element[0].querySelectorAll('#toolBarHeader')[0];
-        let $screen = $element[0].querySelectorAll('#toolBarMenuScreen')[0];
+        let $screen = $element[0].querySelectorAll('#toolbarMenuScreen')[0];
 
         if($tb.classList.contains('open')){
           //Was open, set to closed

@@ -1,12 +1,12 @@
 
-<div id="toolBar">
+<div class="menuOutter">
 
-  <div id="toolBarHeader" class="closed">
+  <div id="toolbarHeader" class="menuElement closed">
 
     <div class="toolbarMain d-flex">
-      <div class="navSection" ng-repeat="toolBarItem in navItems">
-        <div class="navSectionContent" ng-click="toolBarItem.action($event)">
-          <h1>{{toolBarItem.display}}</h1>
+      <div class="navSection" ng-repeat="toolbarItem in navItems">
+        <div class="navSectionContent" ng-click="toolbarItem.action($event)">
+          <h1>{{toolbarItem.display}}</h1>
         </div>
       </div>
 
@@ -25,14 +25,14 @@
     </div>
 
 
-    <div id="toggleButton" ng-click="toggleToolBar()">
+    <div id="toolbarToggleButton" class="menuToggleButton" ng-click="toggleToolBar()">
       <span ng-if="state.open" class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
       <span ng-if="!state.open" class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
     </div>
   </div>
 
 
-  <div id="toolBarMenuScreen" class="modalScreen closed" ng-click="toggleToolBar()">
+  <div id="toolbarMenuScreen" class="modalScreen closed" ng-click="toggleToolBar()">
     <div class="modalContainer" ng-click="$event.stopPropagation()" ng-include="state.view"></div>
   </div>
 

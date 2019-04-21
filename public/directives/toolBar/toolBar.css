@@ -1,57 +1,35 @@
 
-.toolBar {
-  height: 50px;
-}
-
-#toolBarMenuScreen.open {
+#toolbarMenuScreen.open {
   display: flex;
 }
 
-#toolBarMenuScreen.closed {
+#toolbarMenuScreen.closed {
   display: none;
 }
 
-#toolBarHeader {
-  position: absolute;
-  color: white;
+#toolbarHeader {
   left: 0px;
   width: 100vw;
-  transition: .5s;
-  background-color: #4f5b62;
   border-bottom: 4px solid #263238;
-  display: flex;
-  z-index: 20;
 }
 
-#toolBarHeader.closed {
+#toolbarHeader.closed {
   top: calc(-50px - 4px);  /* Transition Property, .navSection height + border-bottom */
-
 }
 
-#toolBarHeader.open {
+#toolbarHeader.open {
   top: 0%;  /* Transition Property */
 }
 
-#toggleButton {
-  position: absolute;
-  z-index: 21;
+#toolbarToggleButton {
   right: 10px;
   bottom: -1em;
-  background-color: rgba(0, 0, 0, 0.33);
-  color: rgba(255, 255, 255, 0.33);
   border-bottom-left-radius: 50%;
   border-bottom-right-radius: 50%;
-  font-size: 2em;
-}
-
-#toggleButton:hover {
-  background-color: #263238;
-  color: white;
 }
 
 .navSection {
   display: table;
-  /* margin: auto; */
   margin-left: 25px;
   height: 50px;
 }

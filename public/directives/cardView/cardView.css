@@ -1,0 +1,31 @@
+
+#cardViewScreen.open {
+  position: relative;
+  display: flex;
+}
+
+#cardViewScreen.closed {
+  display: none;
+}
+
+#cardViewBody {
+  top: 0px;
+  height: 100vh;
+  width: 50%;
+  border-right: 4px solid #263238;
+}
+
+#cardViewBody.closed {
+  left: calc(-50% - 4px);  /* Transition Property, .navSection height + border-bottom */
+}
+
+#cardViewBody.open {
+  left: 0%;  /* Transition Property */
+}
+
+#cardViewToggleButton {
+  bottom: 10px;
+  right: -1em;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}

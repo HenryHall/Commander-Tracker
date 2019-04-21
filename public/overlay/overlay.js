@@ -64,13 +64,13 @@ overlayApp.controller('mainController', ['$scope', '$window', '$location', 'DBSe
       // let commanderName = $scope.playerData[i].commander;
       //
       // DBService.getImageURL(commanderName).then((imgUrl) => {
-      //   $scope.playerStyle[i].backgroundImage = `url(${imgUrl})`;
-      //   $scope.playerStyle[i].backgroundSize = '50%';
-      //   $scope.playerStyle[i].backgroundPosition = 'center top';
-      //   // $scope.playerStyle[i] = {
-      //   //   height: '100%',
-      //   //   "background": `no-repeat top center/100% url(${imgUrl})`
-      //   // }
+      //   // $scope.playerStyle[i].backgroundImage = `url(${imgUrl})`;
+      //   // $scope.playerStyle[i].backgroundSize = '100%';
+      //   // $scope.playerStyle[i].backgroundPosition = 'center top';
+      //   $scope.playerStyle[i].commanderStyle = {
+      //     height: '100%',
+      //     "background": `no-repeat top center/100% url(${imgUrl})`
+      //   }
       // })
       // .catch((error) => {
       //   console.log(error);
