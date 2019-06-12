@@ -5,6 +5,10 @@ overlayApp.controller('massModifyController', ['$scope', function($scope){
   $scope.operator = {type: '-'};  //Initialize value
   $scope.selected = {}; //ng-model for checkboxes
 
+  $scope.selectForModification = function(playerID){
+    $scope.selected[playerID] = !$scope.selected[playerID];
+  }
+
   $scope.modify = function(){
     for(playerID in $scope.selected){
       if($scope.selected[playerID]){

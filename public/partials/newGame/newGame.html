@@ -1,11 +1,12 @@
 
 <div ng-controller="newGameController">
-  <h2 class="mt-4 mb-2">Game Set-up</h2>
 
-  <form id="newPlayerForm" novalidate>
+  <form id="newPlayerForm" class="mt-4" novalidate>
+    <h2 class="mb-2">Game Set-up</h2>
+
     <div class="form-row">
-      <div class="half m-auto form-row col-12 col-sm-6">
-        <div class="col-12 col-sm-4 text-center">
+      <div class="half m-auto pl-0 form-row col-12 col-sm-6">
+        <div class="col-12 col-sm-4 pl-0 text-center">
           <button class="btn btn-lg btn-primary" ng-click="startMatch()">Start Match</button>
         </div>
 
@@ -18,7 +19,7 @@
       </div>
 
       <div class="half form-row col-12 col-sm-6 text-center">
-        <label for="playerCount">
+        <label class="m-auto" for="playerCount">
           <span id="playerCount">Players: {{players.length}}</span>
           <span class="playerIcon glyphicon glyphicon-user" ng-repeat="p in players" aria-hidden="true"></span>
         </label>

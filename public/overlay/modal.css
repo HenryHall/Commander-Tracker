@@ -16,6 +16,7 @@
   width: 90%;
   height: 80%;
   margin: auto;
+  margin-top: 100px;
   border-radius: 5px;
   color: white;
   background-color: #4f5b62;
@@ -24,21 +25,21 @@
 @media (min-width: 576px){
   .modalContainer {
     width: 90%;
-    height: 60%;
+    height: 80%;
   }
 }
 
 @media (min-width: 768px){
   .modalContainer {
-    width: 75%;
-    height: 60%;
+    width: 85%;
+    height: 80%;
   }
 }
 
 @media (min-width: 992px){
   .modalContainer {
-    width: 60%;
-    height: 60%;
+    width: 75%;
+    height: 70%;
   }
 }
 

@@ -1,12 +1,14 @@
 
 <div ng-controller="joinGameController">
-  <h2 class="mt-4 mb-2">Join A Game</h2>
+  <form id="joinGameForm" class="mt-4" novalidate>
+    <h2 class="mb-2">Join A Game</h2>
 
-  <form id="joinGameForm" class="form-inline" novalidate>
-    <label class="sr-only" for="gameIDIn">Game ID</label>
-    <input id="gameIDIn" type="text" class="form-control mb-2 mr-2" ng-model="gameIDIn" placeholder="Game ID">
+    <div class="formContent form-inline">
+      <label class="sr-only" for="gameIDIn">Game ID</label>
+      <input id="gameIDIn" type="text" class="form-control mb-2 mr-2" ng-model="gameIDIn" placeholder="Game ID">
 
-    <button class="btn btn-primary mb-2" ng-click="joinGame()">Join Game</button>
+      <button class="btn btn-primary mb-2" ng-click="joinGame()">Join Game</button>
+    </div>
   </form>
 
   <div ng-if="alert" class="alert alert-danger mt-4 align-middle" role="alert">

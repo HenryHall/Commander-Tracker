@@ -1,8 +1,31 @@
 
-.height-50-percent {
-  height: 50%;
+.massModifyToggleRow {
+  margin: 5px;
+  height: 100%;
+  overflow: scroll;
 }
 
-.modifyPreview {
+.massModifyCheckbox {
+  display: none;
+}
+
+.massModifyCheckbox + .massModifyLifeBox {
+  height: 125px;
+  padding: 5px;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  background-color: rgba(167, 192, 205, .25);
+  transition: .25s;
+}
+
+.massModifyCheckbox:checked + .massModifyLifeBox {
+  border: 2px solid black !important;
+  background-color: rgb(167, 192, 205) !important;  /* Transition Property */
+}
+
+.massModifyLifeDisplay {
+    font-size: 1.25em;
+}
+
+.massModifyPlayerName {
   font-size: 1.25em;
 }
