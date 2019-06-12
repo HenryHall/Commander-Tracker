@@ -8,7 +8,8 @@ myApp.controller('joinGameController', ['$scope', 'NewGameService', function($sc
 
     if(gameID && gameID != ''){
       try {
-        NewGameService.joinGame(gameID);
+        let gameKeys = [gameID];
+        NewGameService.joinGame(gameKeys);
         $scope.alert = false;
       } catch (error) {
         $scope.alertMessage = `joinGame failed:\n${error}`;
